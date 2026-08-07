@@ -1,0 +1,26 @@
+# Dépendances
+node_modules/
+
+# Build Next.js
+.next/
+out/
+next-env.d.ts
+
+# Environnement
+.env
+.env*.local
+
+# Logs de capture (générés par scripts/)
+*.log
+
+# Vidéos sources (lourdes, non versionnées)
+maestria/videos/
+
+# Outillage local
+.claude/
+.vercel/
+
+# Système
+Thumbs.db
+desktop.ini
+.DS_Store
