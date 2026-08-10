@@ -1,66 +1,371 @@
 @import "tailwindcss";
 
+/* Tokens nommés par FONCTION, jamais par apparence : un dégradé n'a pas de
+   fonction, donc pas de token, donc il ne peut pas être posé quelque part.
+   La convention applique la règle à notre place. */
 @theme {
-  --color-canvas: #f2f8f5;
-  --color-canvas-elevated: #e7f2ec;
-  --color-surface: #0c0f0d;
-  --color-ink: #101915;
-  --color-ink-muted: #4c5a53;
-  --color-ink-faint: #75857c;
-  --color-accent: #10b981;
-  --color-accent-ink: #047857;
-  --color-accent-soft: #10b98170;
-  --color-hairline: rgba(16, 25, 21, 0.12);
-  --color-hairline-strong: rgba(16, 25, 21, 0.26);
-  --color-veil: rgba(242, 248, 245, 0.72);
-  --color-veil-strong: rgba(242, 248, 245, 0.95);
+  /* Surface claire — corps du site */
+  --color-surface: #faf7f0;
+  --color-surface-raised: #f1ebde;
+  --color-surface-pressed: #e8e0cf;
+  --color-text: #16150f;
+  --color-text-muted: #4a4a3c;
+  --color-action: #0a6b4a;
 
-  /* Fixed text tones for content that always sits on --color-surface (dark, non-adaptive) */
-  --color-surface-ink: #f4faf7;
-  --color-surface-ink-muted: #9db8ac;
-  --color-surface-ink-faint: #7e968b;
+  /* Surface sombre — hero, contact, pied de page */
+  --color-surface-inverse: #0a0f0c;
+  --color-text-inverse: #f4f1e8;
+  --color-text-inverse-muted: #b8c7be;
+  --color-action-inverse: #6ee7b7;
 
-  --font-display: var(--font-display), "Playfair Display", serif;
-  --font-body: var(--font-body), "Space Grotesk", sans-serif;
+  --color-border: rgba(22, 21, 15, 0.14);
+  --color-border-strong: rgba(22, 21, 15, 0.28);
+
+  --font-display: var(--font-fraunces), Georgia, serif;
+  --font-body: var(--font-archivo), system-ui, sans-serif;
 
   --ease-fluid: cubic-bezier(0.32, 0.72, 0, 1);
-  --ease-out-soft: cubic-bezier(0.16, 1, 0.3, 1);
-
-  --breakpoint-sm: 640px;
-  --breakpoint-md: 768px;
-  --breakpoint-lg: 1024px;
-  --breakpoint-xl: 1280px;
-  --breakpoint-2xl: 1536px;
 }
 
-:root {
-  color-scheme: light;
-  --gradient-intensity: 0.95;
+/* IMPORTANT — tout ce qui suit doit vivre dans une @layer.
+   En Tailwind v4 les utilitaires sont dans `@layer utilities`, et du CSS
+   hors couche bat TOUTE règle en couche quelle que soit la spécificité.
+   Un `a { color: inherit }` non calqué écrasait silencieusement chaque
+   classe de couleur posée sur un lien. */
+
+@layer base {
+  html {
+    background-color: #faf7f0;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-surface);
+    color: var(--color-text);
+    font-family: var(--font-body);
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background-color: var(--color-action);
+    color: var(--color-surface);
+  }
+
+  a {
+    color: inherit;
+  }
+
+  /* Bandeau d'échéance déjà fermé : masqué avant peinture par le script
+     inline du layout. Aucun décalage au chargement. */
+  html[data-echeance="masquee"] #bandeau-echeance {
+    display: none;
+  }
+
+  :where(a, button, input, textarea, [tabindex]):focus-visible {
+    outline: 2px solid var(--color-action);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  .on-dark :where(a, button):focus-visible {
+    outline-color: var(--color-action-inverse);
+  }
 }
 
-html {
-  background-color: #f2f8f5;
-  scroll-behavior: smooth;
-}
+@layer components {
+  /* -------------------------------------------------------------
+     Primitive : bande pleine largeur + filet + étiquette en
+     gouttière + colonne de texte asymétrique (62ch max).
+     Une seule structure, répétée pour chaque section.
+     ------------------------------------------------------------- */
 
-body {
-  background-color: var(--color-canvas);
-  background-image: linear-gradient(
-    180deg,
-    rgba(2, 8, 6, var(--gradient-intensity)) 0%,
-    rgba(16, 185, 129, var(--gradient-intensity)) 100%
-  );
-  background-size: 100% 100%;
-  color: var(--color-ink);
-  font-family: var(--font-body);
-  -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
-  overflow-x: hidden;
-}
+  .band {
+    border-top: 1px solid var(--color-border);
+  }
 
-::selection {
-  background-color: var(--color-accent);
-  color: #ffffff;
+  .band-inner {
+    margin-inline: auto;
+    max-width: 78rem;
+    padding: 4rem 1.5rem;
+  }
+
+  @media (min-width: 768px) {
+    .band-inner {
+      display: grid;
+      grid-template-columns: 11rem minmax(0, 1fr);
+      gap: 3rem;
+      padding: 6.5rem 3rem;
+    }
+  }
+
+  .band-label {
+    font-family: var(--font-body);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    line-height: 1.4;
+    color: var(--color-text-muted);
+    margin-bottom: 1.75rem;
+  }
+
+  @media (min-width: 768px) {
+    .band-label {
+      margin-bottom: 0;
+      padding-top: 0.9rem;
+      border-top: 2px solid var(--color-text);
+      align-self: start;
+    }
+  }
+
+  /* Colonne de lecture — jamais pleine largeur, jamais centrée */
+  .band-col {
+    max-width: 62ch;
+  }
+
+  .band-col > * + * {
+    margin-top: 1.25rem;
+  }
+
+  .band-col h2 {
+    font-family: var(--font-display);
+    font-size: clamp(1.875rem, 4.5vw, 2.875rem);
+    font-weight: 600;
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+  }
+
+  .band-col h3 {
+    font-family: var(--font-display);
+    font-size: clamp(1.3rem, 2.6vw, 1.6rem);
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+  }
+
+  .band-col p {
+    color: var(--color-text-muted);
+    text-wrap: pretty;
+  }
+
+  .band-col h2 + p,
+  .band-col h3 + p {
+    margin-top: 0.75rem;
+  }
+
+  /* Espacement variable selon la hiérarchie */
+  .band-col > h3 {
+    margin-top: 2.75rem;
+  }
+
+  /* -------------------------------------------------------------
+     Liens
+     ------------------------------------------------------------- */
+
+  .link {
+    color: var(--color-action);
+    text-decoration: underline;
+    text-underline-offset: 0.22em;
+    text-decoration-thickness: 1px;
+    border-radius: 2px;
+    transition: text-decoration-thickness 0.15s var(--ease-fluid);
+  }
+
+  .link:hover {
+    text-decoration-thickness: 2px;
+  }
+
+  .link:active {
+    opacity: 0.7;
+  }
+
+  /* Cible tactile : 44px minimum au doigt. Sur souris, le lien garde sa
+     taille naturelle pour ne pas casser le rythme typographique. */
+  @media (pointer: coarse) {
+    .tap {
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+    }
+  }
+
+  /* -------------------------------------------------------------
+     Curseur du calculateur. Volontairement dépouillé : un filet, un
+     bouton rond plein. Pas de piste colorée, pas d'ombre — il doit
+     ressembler au reste de la page, pas à un outil.
+     ------------------------------------------------------------- */
+
+  .curseur {
+    -webkit-appearance: none;
+    appearance: none;
+    display: block;
+    width: 100%;
+    height: 24px; /* cible tactile confortable, piste fine dessinée dedans */
+    background: transparent;
+    cursor: pointer;
+  }
+
+  .curseur::-webkit-slider-runnable-track {
+    height: 2px;
+    background: var(--color-border-strong);
+  }
+
+  .curseur::-moz-range-track {
+    height: 2px;
+    background: var(--color-border-strong);
+  }
+
+  .curseur::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 22px;
+    height: 22px;
+    margin-top: -10px; /* recentre le bouton sur la piste de 2px */
+    border-radius: 50%;
+    background: var(--color-action);
+    border: none;
+    transition: transform 0.15s var(--ease-fluid);
+  }
+
+  .curseur::-moz-range-thumb {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: var(--color-action);
+    border: none;
+    transition: transform 0.15s var(--ease-fluid);
+  }
+
+  .curseur:hover::-webkit-slider-thumb {
+    transform: scale(1.12);
+  }
+  .curseur:hover::-moz-range-thumb {
+    transform: scale(1.12);
+  }
+  .curseur:active::-webkit-slider-thumb {
+    transform: scale(0.94);
+  }
+  .curseur:active::-moz-range-thumb {
+    transform: scale(0.94);
+  }
+
+  .curseur:focus-visible {
+    outline: none;
+  }
+  .curseur:focus-visible::-webkit-slider-thumb {
+    box-shadow: 0 0 0 3px var(--color-surface), 0 0 0 5px var(--color-action);
+  }
+  .curseur:focus-visible::-moz-range-thumb {
+    box-shadow: 0 0 0 3px var(--color-surface), 0 0 0 5px var(--color-action);
+  }
+
+  /* -------------------------------------------------------------
+     Bouton « gem » — taille émeraude.
+     Contrainte AA : le dégradé ne descend jamais sous #10B981 derrière
+     le texte (#052E22 sur #10B981 = 5,83:1). La profondeur vient des
+     ombres internes en bordure, pas d'un fond sombre sous le texte.
+     ------------------------------------------------------------- */
+
+  .gem,
+  .gem-quiet {
+    --cut: 11px;
+    position: relative;
+    isolation: isolate;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.625rem;
+    padding: 0.9rem 1.6rem;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    font-weight: 600;
+    text-align: center;
+    clip-path: polygon(
+      var(--cut) 0,
+      calc(100% - var(--cut)) 0,
+      100% var(--cut),
+      100% calc(100% - var(--cut)),
+      calc(100% - var(--cut)) 100%,
+      var(--cut) 100%,
+      0 calc(100% - var(--cut)),
+      0 var(--cut)
+    );
+    transition: box-shadow 0.25s var(--ease-fluid), filter 0.25s var(--ease-fluid);
+  }
+
+  .gem {
+    color: #052e22;
+    background:
+      radial-gradient(circle at 22% 18%, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0) 6%),
+      linear-gradient(158deg, #a4f4d1 0%, #4fdda9 26%, #22c78d 58%, #10b981 100%);
+    box-shadow:
+      inset 0 2px 2px rgba(255, 255, 255, 0.65),
+      inset 0 -6px 10px -4px rgba(2, 40, 28, 0.55),
+      inset 5px 0 10px -6px rgba(255, 255, 255, 0.5),
+      inset -5px 0 10px -6px rgba(2, 40, 28, 0.4),
+      0 10px 20px -12px rgba(6, 95, 70, 0.75);
+  }
+
+  /* Facette interne — l'arête de la taille à degrés */
+  .gem::after,
+  .gem-quiet::after {
+    content: "";
+    position: absolute;
+    inset: 4px;
+    z-index: -1;
+    pointer-events: none;
+    clip-path: polygon(
+      8px 0,
+      calc(100% - 8px) 0,
+      100% 8px,
+      100% calc(100% - 8px),
+      calc(100% - 8px) 100%,
+      8px 100%,
+      0 calc(100% - 8px),
+      0 8px
+    );
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.34);
+  }
+
+  .gem:hover {
+    filter: brightness(1.06) saturate(1.06);
+    box-shadow:
+      inset 0 2px 2px rgba(255, 255, 255, 0.7),
+      inset 0 -6px 10px -4px rgba(2, 40, 28, 0.55),
+      inset 5px 0 10px -6px rgba(255, 255, 255, 0.5),
+      inset -5px 0 10px -6px rgba(2, 40, 28, 0.4),
+      0 16px 28px -12px rgba(6, 95, 70, 0.85);
+  }
+
+  .gem:active {
+    filter: brightness(0.95);
+    box-shadow:
+      inset 0 3px 6px rgba(2, 40, 28, 0.45),
+      0 4px 10px -8px rgba(6, 95, 70, 0.6);
+  }
+
+  /* Variante discrète, sur papier */
+  .gem-quiet {
+    color: var(--color-text);
+    background: var(--color-surface-raised);
+    box-shadow:
+      inset 0 0 0 1px var(--color-border-strong),
+      inset 0 2px 2px rgba(255, 255, 255, 0.8);
+  }
+
+  .gem-quiet::after {
+    box-shadow: inset 0 0 0 1px rgba(22, 21, 15, 0.08);
+  }
+
+  .gem-quiet:hover {
+    background: var(--color-surface-pressed);
+  }
+
+  .gem-quiet:active {
+    filter: brightness(0.97);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -72,183 +377,4 @@ body {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
-}
-
-.grain-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 60;
-  pointer-events: none;
-  opacity: 0.04;
-  mix-blend-mode: overlay;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 250 250' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-}
-
-.cursor-ring,
-.cursor-dot {
-  position: fixed;
-  top: 0;
-  left: 0;
-  pointer-events: none;
-  z-index: 9999;
-  border-radius: 9999px;
-  mix-blend-mode: difference;
-}
-
-.cursor-ring {
-  width: 36px;
-  height: 36px;
-  border: 1px solid rgba(236, 236, 236, 0.5);
-  transform: translate(-50%, -50%);
-  transition: width 0.3s var(--ease-fluid), height 0.3s var(--ease-fluid),
-    border-color 0.3s var(--ease-fluid);
-}
-
-.cursor-dot {
-  width: 5px;
-  height: 5px;
-  background-color: rgba(236, 236, 236, 0.9);
-  transform: translate(-50%, -50%);
-}
-
-@media (hover: none), (pointer: coarse) {
-  .cursor-ring,
-  .cursor-dot {
-    display: none;
-  }
-}
-
-/* Emerald-cut gem buttons: octagonal step-cut silhouette + layered facets */
-.gem,
-.gem-outline {
-  --cut: 12px;
-  position: relative;
-  isolation: isolate;
-  clip-path: polygon(
-    var(--cut) 0,
-    calc(100% - var(--cut)) 0,
-    100% var(--cut),
-    100% calc(100% - var(--cut)),
-    calc(100% - var(--cut)) 100%,
-    var(--cut) 100%,
-    0 calc(100% - var(--cut)),
-    0 var(--cut)
-  );
-  transition: box-shadow 0.4s var(--ease-fluid), filter 0.4s var(--ease-fluid),
-    transform 0.4s var(--ease-fluid);
-}
-
-.gem {
-  color: #052e22;
-  background: radial-gradient(circle at 20% 16%, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0) 4%),
-    linear-gradient(122deg, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0) 24%),
-    linear-gradient(298deg, rgba(2, 40, 28, 0.55) 0%, rgba(2, 40, 28, 0) 32%),
-    linear-gradient(
-      155deg,
-      #a4f4d1 0%,
-      #34d399 20%,
-      #10b981 42%,
-      #0c9468 65%,
-      #065f46 85%,
-      #043d2c 100%
-    );
-  box-shadow:
-    inset 0 2px 2px rgba(255, 255, 255, 0.6),
-    inset 0 -7px 14px rgba(2, 40, 28, 0.6),
-    inset 4px 0 8px rgba(255, 255, 255, 0.15),
-    inset -4px 0 10px rgba(2, 40, 28, 0.35),
-    0 16px 28px -12px rgba(6, 95, 70, 0.7),
-    0 3px 6px rgba(2, 20, 15, 0.35);
-  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5), 0 -1px 1px rgba(2, 40, 28, 0.45);
-}
-
-.gem::after {
-  content: "";
-  position: absolute;
-  inset: 5px;
-  z-index: -1;
-  pointer-events: none;
-  clip-path: polygon(
-    calc(var(--cut) - 3px) 0,
-    calc(100% - (var(--cut) - 3px)) 0,
-    100% calc(var(--cut) - 3px),
-    100% calc(100% - (var(--cut) - 3px)),
-    calc(100% - (var(--cut) - 3px)) 100%,
-    calc(var(--cut) - 3px) 100%,
-    0 calc(100% - (var(--cut) - 3px)),
-    0 calc(var(--cut) - 3px)
-  );
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.3);
-}
-
-.gem:hover {
-  filter: brightness(1.08) saturate(1.1);
-  box-shadow:
-    inset 0 2px 2px rgba(255, 255, 255, 0.65),
-    inset 0 -7px 14px rgba(2, 40, 28, 0.6),
-    inset 4px 0 8px rgba(255, 255, 255, 0.18),
-    inset -4px 0 10px rgba(2, 40, 28, 0.35),
-    0 20px 34px -12px rgba(6, 95, 70, 0.8),
-    0 3px 6px rgba(2, 20, 15, 0.35);
-}
-
-.gem:active {
-  filter: brightness(0.94);
-  box-shadow:
-    inset 0 3px 6px rgba(2, 40, 28, 0.6),
-    inset 0 -2px 4px rgba(255, 255, 255, 0.25),
-    0 6px 14px -8px rgba(6, 95, 70, 0.6);
-}
-
-.gem-outline {
-  color: #0c3d2b;
-  background: radial-gradient(circle at 20% 16%, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0) 5%),
-    linear-gradient(122deg, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0) 26%),
-    linear-gradient(298deg, rgba(6, 95, 70, 0.18) 0%, rgba(6, 95, 70, 0) 34%),
-    linear-gradient(155deg, #eafff6 0%, #d3f5e6 45%, #b7ecd6 100%);
-  box-shadow:
-    inset 0 2px 2px rgba(255, 255, 255, 0.85),
-    inset 0 -4px 9px rgba(6, 95, 70, 0.25),
-    inset 3px 0 6px rgba(255, 255, 255, 0.3),
-    inset -3px 0 6px rgba(6, 95, 70, 0.15),
-    0 12px 22px -12px rgba(6, 95, 70, 0.45),
-    0 1px 2px rgba(2, 20, 15, 0.12);
-  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.6);
-}
-
-.gem-outline::after {
-  content: "";
-  position: absolute;
-  inset: 5px;
-  z-index: -1;
-  pointer-events: none;
-  clip-path: polygon(
-    calc(var(--cut) - 3px) 0,
-    calc(100% - (var(--cut) - 3px)) 0,
-    100% calc(var(--cut) - 3px),
-    100% calc(100% - (var(--cut) - 3px)),
-    calc(100% - (var(--cut) - 3px)) 100%,
-    calc(var(--cut) - 3px) 100%,
-    0 calc(100% - (var(--cut) - 3px)),
-    0 calc(var(--cut) - 3px)
-  );
-  box-shadow: inset 0 0 0 1px rgba(6, 95, 70, 0.18);
-}
-
-.gem-outline:hover {
-  filter: brightness(1.03);
-  box-shadow:
-    inset 0 2px 2px rgba(255, 255, 255, 0.9),
-    inset 0 -4px 9px rgba(6, 95, 70, 0.3),
-    inset 3px 0 6px rgba(255, 255, 255, 0.32),
-    inset -3px 0 6px rgba(6, 95, 70, 0.18),
-    0 16px 26px -12px rgba(6, 95, 70, 0.55),
-    0 1px 2px rgba(2, 20, 15, 0.12);
-}
-
-.gem-outline:active {
-  filter: brightness(0.97);
-  box-shadow:
-    inset 0 3px 5px rgba(6, 95, 70, 0.3),
-    0 4px 10px -8px rgba(6, 95, 70, 0.4);
 }

@@ -1,46 +1,34 @@
-import type { Metadata } from "next";
-import { Playfair_Display, Space_Grotesk } from "next/font/google";
+import type { Metadata, Viewport } from "next";
+import { Fraunces, Archivo } from "next/font/google";
 import "./globals.css";
-import { CustomCursor } from "@/components/CustomCursor";
-import { GrainOverlay } from "@/components/GrainOverlay";
-import { GradientDial } from "@/components/GradientDial";
-import { GradientIntensityProvider } from "@/components/GradientIntensityContext";
 
-const playfair = Playfair_Display({
+const fraunces = Fraunces({
   subsets: ["latin"],
   display: "swap",
-  variable: "--font-display",
-  weight: ["400", "500", "600", "700"],
-  style: ["normal", "italic"],
+  variable: "--font-fraunces",
 });
 
-const spaceGrotesk = Space_Grotesk({
+const archivo = Archivo({
   subsets: ["latin"],
   display: "swap",
-  variable: "--font-body",
-  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-archivo",
 });
 
 export const metadata: Metadata = {
-  title: "Johària — Designer-builder IA, sites web & SaaS",
+  title: "Johària — Sites internet pour les commerces de Guadeloupe",
   description:
-    "Johària orchestre agents IA, sites web et SaaS. Portfolio d'un designer-builder qui conçoit, code et déploie des produits numériques premium.",
-  keywords: [
-    "designer",
-    "agents IA",
-    "sites web",
-    "SaaS",
-    "portfolio",
-    "Johària",
-  ],
-  authors: [{ name: "Johària" }],
+    "Je crée des sites pour les commerces et les artisans de Guadeloupe et j'automatise les tâches répétitives. Un seul interlocuteur, hébergement compris.",
   openGraph: {
-    title: "Johària — Designer-builder IA, sites web & SaaS",
+    title: "Johària — Sites internet pour les commerces de Guadeloupe",
     description:
-      "Johària orchestre agents IA, sites web et SaaS. Portfolio d'un designer-builder premium.",
+      "Un site qu'on trouve quand on vous cherche, et les tâches répétitives en moins. Guadeloupe.",
     type: "website",
     locale: "fr_FR",
   },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#0A0F0C",
 };
 
 export default function RootLayout({
@@ -49,19 +37,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html
-      lang="fr"
-      className={`${playfair.variable} ${spaceGrotesk.variable}`}
-      suppressHydrationWarning
-    >
-      <body className="antialiased">
-        <GradientIntensityProvider>
-          <CustomCursor />
-          <GrainOverlay />
-          {children}
-          <GradientDial />
-        </GradientIntensityProvider>
-      </body>
+    <html lang="fr" className={`${fraunces.variable} ${archivo.variable}`}>
+      <head>
+        {/* Lu AVANT peinture : si le visiteur a déjà fermé le bandeau, il n'est
+            jamais dessiné. Sans ça, on peindrait le bandeau puis on le
+            retirerait au montage — un décalage visible à chaque visite. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `try{if(localStorage.getItem('joharia:echeance-facture')==='masquee')document.documentElement.setAttribute('data-echeance','masquee')}catch(e){}`,
+          }}
+        />
+      </head>
+      <body>{children}</body>
     </html>
   );
 }
