@@ -20,8 +20,11 @@ async function scenario(nom, { reducedMotion } = {}) {
     ...(reducedMotion ? { reducedMotion: "reduce" } : {}),
   });
   const page = await ctx.newPage();
-  await page.goto(URL, { waitUntil: "networkidle" });
-  await page.waitForTimeout(600);
+  // `networkidle` n'aboutit pas ici (une connexion reste ouverte) : on attend
+  // le DOM puis l'hydratation, constatée par la présence des curseurs.
+  await page.goto(URL, { waitUntil: "domcontentloaded", timeout: 60_000 });
+  await page.waitForSelector("#devis-semaine", { timeout: 30_000 });
+  await page.waitForTimeout(900);
 
   const lire = () =>
     page.evaluate(() => {

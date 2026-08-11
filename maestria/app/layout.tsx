@@ -44,7 +44,7 @@ export default function RootLayout({
             retirerait au montage — un décalage visible à chaque visite. */}
         <script
           dangerouslySetInnerHTML={{
-            __html: `try{if(localStorage.getItem('joharia:echeance-facture')==='masquee')document.documentElement.setAttribute('data-echeance','masquee')}catch(e){}`,
+            __html: `document.documentElement.classList.add('js');try{if(localStorage.getItem('joharia:echeance-facture')==='masquee')document.documentElement.setAttribute('data-echeance','masquee')}catch(e){}`,
           }}
         />
       </head>

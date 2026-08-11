@@ -89,12 +89,9 @@ export function Process() {
 
 function Etapes({ etapes }: { etapes: { titre: string; texte: string }[] }) {
   return (
-    <ol className="!mt-8 list-none">
+    <ol data-reveler className="etapes !mt-8 list-none">
       {etapes.map((e) => (
-        <li
-          key={e.titre}
-          className="border-t border-[var(--color-border)] py-5 first:border-t-0 first:pt-0"
-        >
+        <li key={e.titre} className="relative py-4 first:pt-0">
           <h3 className="!mt-0 text-[1.15rem]">{e.titre}</h3>
           <p className="mt-2">{e.texte}</p>
         </li>

@@ -58,7 +58,7 @@ export function Automatisation() {
             ordres de grandeur relevés en discutant :
           </p>
 
-          <dl className="!mt-8">
+          <dl data-reveler className="reveal !mt-8">
             {taches.map((t) => (
               <div
                 key={t.quoi}
