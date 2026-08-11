@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { whatsappAutomatisation } from "@/lib/site";
 
 /* Valeurs de départ. Elles sont aussi celles rendues côté serveur : sans
@@ -28,6 +28,12 @@ export function CalculTemps() {
   const heuresParAn = (devis * 52 * minutes) / 60;
   const euros = heuresParAn * taux;
   const joursDeTravail = heuresParAn / 7;
+
+  /* Le total compte de 0 à sa valeur, une seule fois, à l'entrée à l'écran.
+     `progression` vaut 1 tant que le compte n'a pas démarré : la valeur est
+     donc déjà juste au rendu serveur et sans JavaScript. */
+  const { ref: refTotal, progression } = useCompteurUnique();
+  const heuresAffichees = heuresParAn * progression;
 
   return (
     <div className="mt-10">
@@ -65,8 +71,11 @@ export function CalculTemps() {
           Ce que ça vous prend dans l&apos;année
         </p>
 
-        <p className="mt-2 font-[family-name:var(--font-display)] text-[clamp(2.75rem,11vw,4.5rem)] font-semibold leading-[0.95] tracking-[-0.03em] tabular-nums">
-          {nombreFr(heuresParAn)}&nbsp;heures
+        <p
+          ref={refTotal}
+          className="mt-2 font-[family-name:var(--font-display)] text-[clamp(2.75rem,11vw,4.5rem)] font-semibold leading-[0.95] tracking-[-0.03em] tabular-nums"
+        >
+          {nombreFr(heuresAffichees)}&nbsp;heures
         </p>
 
         <p className="mt-3 text-[var(--color-text-muted)]">
@@ -112,6 +121,48 @@ export function CalculTemps() {
       </div>
     </div>
   );
+}
+
+/** Compte de 0 à 1 en 800 ms, en ease-out, la première fois que l'élément
+ *  entre à l'écran. Retourne 1 d'emblée si le compte n'a pas lieu d'être
+ *  (rendu serveur, pas de JS, mouvement réduit, pas d'IntersectionObserver),
+ *  de sorte que le chiffre juste est toujours celui affiché par défaut. */
+function useCompteurUnique() {
+  const ref = useRef<HTMLParagraphElement>(null);
+  const [progression, setProgression] = useState(1);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    let raf = 0;
+    const observateur = new IntersectionObserver(
+      ([e]) => {
+        if (!e.isIntersecting) return;
+        observateur.disconnect();
+
+        const debut = performance.now();
+        const DUREE = 800;
+        const avancer = (maintenant: number) => {
+          const t = Math.min(1, (maintenant - debut) / DUREE);
+          setProgression(1 - Math.pow(1 - t, 3)); // ease-out cubique
+          if (t < 1) raf = requestAnimationFrame(avancer);
+        };
+        setProgression(0);
+        raf = requestAnimationFrame(avancer);
+      },
+      { threshold: 0.6 }
+    );
+
+    observateur.observe(el);
+    return () => {
+      observateur.disconnect();
+      cancelAnimationFrame(raf);
+    };
+  }, []);
+
+  return { ref, progression };
 }
 
 function Curseur({

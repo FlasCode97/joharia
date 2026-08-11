@@ -1,4 +1,7 @@
 import { DeadlineBanner } from "@/components/DeadlineBanner";
+import { BarreWhatsApp } from "@/components/BarreWhatsApp";
+import { PauseHorsChamp } from "@/components/PauseHorsChamp";
+import { RevelerAuScroll } from "@/components/RevelerAuScroll";
 import { Navigation } from "@/components/Navigation";
 import { Hero } from "@/components/Hero";
 import { Services } from "@/components/Services";
@@ -29,7 +32,12 @@ export default function Home() {
           <Contact />
         </main>
         <SiteFooter />
+        <BarreWhatsApp />
       </div>
+
+      {/* Orchestrateurs : un observateur chacun, pour toute la page. */}
+      <PauseHorsChamp />
+      <RevelerAuScroll />
     </>
   );
 }

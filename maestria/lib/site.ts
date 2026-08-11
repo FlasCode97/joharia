@@ -42,8 +42,7 @@ export const dylan = {
   name: "Dylan Etonno",
   metier: "graphiste, monteur vidéo et community manager",
   url: "https://dylan-etonno.pages.dev",
-  /** {{À CONFIRMER PAR MAT}} — mois et année de mise en ligne réels. */
-  livraison: "{{À CONFIRMER PAR MAT}}",
+  livraison: "le 5 août 2026",
   capture: "/realisations/dylan-etonno.webp",
   captureLargeur: 390,
   captureHauteur: 844,

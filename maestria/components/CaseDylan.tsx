@@ -1,6 +1,25 @@
 import Image from "next/image";
 import { dylan } from "@/lib/site";
 
+/* Ce que Mat fait tourner pour lui-même. Rédigé d'après ses indications :
+   à relire, ce sont des affirmations le concernant. */
+const miennes = [
+  {
+    titre: "Le tri de ma boîte mail",
+    avant:
+      "Tout arrivait au même endroit. Je relisais la boîte entière pour retrouver les deux messages qui demandaient vraiment une réponse.",
+    apres:
+      "Chaque mail est rangé dès son arrivée : à répondre, à facturer, à archiver. Je n'ouvre que la première pile.",
+  },
+  {
+    titre: "La relance de mes devis",
+    avant:
+      "J'envoyais un devis et je passais à autre chose. Je m'en apercevais en faisant mes comptes, quand le client était déjà parti ailleurs.",
+    apres:
+      "Sans réponse, un message part tout seul. Je ne relance plus de mémoire, et je ne relance plus trop tard.",
+  },
+];
+
 /** La seule référence livrée. Aucun superlatif, aucun chiffre de résultat :
  *  uniquement des faits vérifiables en ouvrant le lien. On assume le volume,
  *  on ne l'annonce plus comme une limite. */
@@ -77,17 +96,30 @@ export function CaseDylan() {
             </p>
 
             <dl className="!mt-8">
-              {[1, 2].map((n) => (
+              {miennes.map((a) => (
                 <div
-                  key={n}
+                  key={a.titre}
+                  data-reveler
                   className="border-t border-[var(--color-border)] py-5 first:border-t-0 first:pt-0"
                 >
                   <dt className="font-[family-name:var(--font-display)] text-[1.15rem] font-semibold">
-                    {"{{À CONFIRMER PAR MAT}}"} — automatisation {n}
+                    {a.titre}
                   </dt>
-                  <dd className="mt-2 text-[var(--color-text-muted)]">
-                    Avant : {"{{À CONFIRMER PAR MAT}}"}. Maintenant :{" "}
-                    {"{{À CONFIRMER PAR MAT}}"}.
+                  <dd className="mt-3 grid gap-y-1 sm:grid-cols-[4.5rem_1fr] sm:gap-x-4 sm:gap-y-2">
+                    <span className="text-[0.8125rem] text-[var(--color-text-muted)] sm:pt-1">
+                      Avant
+                    </span>
+                    <span className="text-[var(--color-text-muted)]">
+                      {/* Le trait se dessine au scroll : on voit la ligne être
+                          rayée, on ne la découvre pas déjà barrée. */}
+                      <span className="rature">{a.avant}</span>
+                    </span>
+                    <span className="apres-auto mt-2 text-[0.8125rem] text-[var(--color-action)] sm:mt-0 sm:pt-1">
+                      Depuis
+                    </span>
+                    <span className="apres-auto text-[var(--color-text)]">
+                      {a.apres}
+                    </span>
                   </dd>
                 </div>
               ))}

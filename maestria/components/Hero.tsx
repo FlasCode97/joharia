@@ -1,4 +1,4 @@
-import { HeroCanvas } from "./HeroCanvas";
+import { ChaineAutomatisation } from "./ChaineAutomatisation";
 import { whatsappUrl, dylan } from "@/lib/site";
 
 /** Le texte est rendu côté serveur : il est peint avant que la 3D soit
@@ -70,13 +70,15 @@ export function Hero() {
           </div>
         </div>
 
-        {/* La pierre. Décorative : masquée aux lecteurs d'écran, absente sur
-            petit écran où elle coûterait plus qu'elle ne montre. */}
+        {/* La chaîne. Contrairement au blob qu'elle remplace, elle dit
+            quelque chose — et elle s'affiche aussi sur téléphone, où elle ne
+            coûte que quelques kilo-octets de SVG. Hauteur réservée : aucun
+            décalage au chargement. */}
         <div
-          aria-hidden="true"
-          className="relative hidden h-[26rem] w-full md:block"
+          data-pause-hors-champ
+          className="flex min-h-[13rem] items-center justify-center md:min-h-[16rem]"
         >
-          <HeroCanvas />
+          <ChaineAutomatisation />
         </div>
       </div>
     </section>

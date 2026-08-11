@@ -192,6 +192,136 @@
   }
 
   /* -------------------------------------------------------------
+     Chaîne d'automatisation du hero. Animation CSS pure, 8 s, en boucle.
+     Elle se met en pause hors viewport via `.hors-champ` posé par
+     l'IntersectionObserver — une boucle de rendu permanente sur un
+     téléphone contredirait la promesse de vitesse du site.
+     ------------------------------------------------------------- */
+
+  .chaine {
+    color: var(--color-text-inverse-muted);
+  }
+
+  .chaine-trait {
+    stroke-dasharray: 300;
+    stroke-dashoffset: 300;
+    animation: chaine-remplir 8s var(--ease-fluid) infinite;
+  }
+
+  .chaine-pastille {
+    opacity: 0;
+    animation: chaine-allumer 8s var(--ease-fluid) infinite;
+  }
+
+  /* Chaque nœud s'allume quand l'impulsion l'atteint */
+  .chaine-noeud-1 .chaine-pastille {
+    animation-delay: 0.4s;
+  }
+  .chaine-noeud-2 .chaine-pastille {
+    animation-delay: 1.6s;
+  }
+  .chaine-noeud-3 .chaine-pastille {
+    animation-delay: 2.8s;
+  }
+  .chaine-noeud-4 .chaine-pastille {
+    animation-delay: 4s;
+  }
+
+  @keyframes chaine-remplir {
+    0% {
+      stroke-dashoffset: 300;
+    }
+    55% {
+      stroke-dashoffset: 0;
+    }
+    85% {
+      stroke-dashoffset: 0;
+      opacity: 1;
+    }
+    100% {
+      stroke-dashoffset: 0;
+      opacity: 0.25;
+    }
+  }
+
+  @keyframes chaine-allumer {
+    0%,
+    4% {
+      opacity: 0;
+    }
+    12%,
+    85% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0.3;
+    }
+  }
+
+  /* Hors viewport : plus une seule image calculée. */
+  .hors-champ .chaine-trait,
+  .hors-champ .chaine-pastille {
+    animation-play-state: paused;
+  }
+
+  /* -------------------------------------------------------------
+     Barre WhatsApp fixe (mobile). Hauteur fixe, encoche respectée.
+     ------------------------------------------------------------- */
+
+  .barre-whatsapp {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 60;
+    padding: 0.75rem 1rem calc(0.75rem + env(safe-area-inset-bottom, 0px));
+    background: color-mix(in srgb, var(--color-surface-inverse) 92%, transparent);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    transition: transform 0.3s var(--ease-fluid), opacity 0.3s var(--ease-fluid);
+  }
+
+  .barre-whatsapp-cachee {
+    transform: translateY(110%);
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  /* -------------------------------------------------------------
+     Avant / après : le trait qui barre la version manuelle se dessine
+     au scroll, puis la version automatique s'écrit dessous.
+     Démonstration, pas décoration.
+     ------------------------------------------------------------- */
+
+  .rature {
+    position: relative;
+    display: inline;
+    background-image: linear-gradient(
+      currentColor,
+      currentColor
+    );
+    background-repeat: no-repeat;
+    background-position: 0 55%;
+    background-size: 0% 1px;
+    transition: background-size 0.7s var(--ease-fluid);
+  }
+
+  .vu .rature {
+    background-size: 100% 1px;
+  }
+
+  .apres-auto {
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 0.5s var(--ease-fluid) 0.55s,
+      transform 0.5s var(--ease-fluid) 0.55s;
+  }
+
+  .vu .apres-auto {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* -------------------------------------------------------------
      Curseur du calculateur. Volontairement dépouillé : un filet, un
      bouton rond plein. Pas de piste colorée, pas d'ombre — il doit
      ressembler au reste de la page, pas à un outil.
@@ -376,5 +506,25 @@
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+
+  /* État final lisible, pas un état initial figé : la chaîne s'affiche
+     complète et allumée, les blocs révélés au scroll restent visibles. */
+  .chaine-trait {
+    stroke-dashoffset: 0 !important;
+  }
+  .chaine-pastille {
+    opacity: 1 !important;
+  }
+  .reveal,
+  .apres-auto {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .rature {
+    background-size: 100% 1px !important;
+  }
+  .barre-whatsapp {
+    transition: none !important;
   }
 }
