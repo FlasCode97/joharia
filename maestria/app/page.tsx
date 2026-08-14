@@ -15,7 +15,7 @@ import { Contact } from "@/components/Contact";
 import { SiteFooter } from "@/components/SiteFooter";
 
 export const metadata: Metadata = {
-  title: "Johària — Automatiser les tâches qui vous gardent au bureau",
+  title: "Johària, automatiser les tâches qui vous gardent au bureau",
   description:
     "Devis, relances, messages, factures : je fabrique des machines qui les font à votre place. Pour les commerces et artisans de Guadeloupe.",
 };

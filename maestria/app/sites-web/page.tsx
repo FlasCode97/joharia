@@ -11,7 +11,7 @@ import { Contact } from "@/components/Contact";
 import { SiteFooter } from "@/components/SiteFooter";
 
 export const metadata: Metadata = {
-  title: "Johària — Sites internet pour les commerces de Guadeloupe",
+  title: "Johària, sites internet pour les commerces de Guadeloupe",
   description:
     "Une page qui dit qui vous êtes, où vous êtes et combien ça coûte. Livrée, hébergée, rapide sur téléphone. Deux sites livrés, visibles en ligne.",
 };

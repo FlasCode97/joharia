@@ -17,7 +17,7 @@ export function Demonstrations() {
           <h2>Je préfère vous montrer</h2>
           <p>
             Je n&apos;ai encore installé d&apos;automatisation chez aucun
-            client — c&apos;est nouveau dans ce que je propose. Alors plutôt
+            client : c&apos;est nouveau dans ce que je propose. Alors plutôt
             que de vous raconter ce que ça donnerait, voilà les machines.
             Celle du dessous, vous pouvez l&apos;essayer.
           </p>
@@ -32,7 +32,7 @@ export function Demonstrations() {
             <h3 className="!mt-0">Un client demande un prix. Le devis sort.</h3>
             <p>
               Écrivez ce qu&apos;un client vous écrirait, et regardez. Essayez
-              « vidange », « freins », « pneus », « révision », « clim » — ou
+              « vidange », « freins », « pneus », « révision », « clim », ou
               votre propre phrase.
             </p>
             <DemoDevis />

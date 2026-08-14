@@ -24,7 +24,7 @@ export function Facturation() {
           <p>
             Ce que vous devez faire d&apos;ici là tient en une ligne : choisir
             votre plateforme. C&apos;est souvent votre logiciel de compta ou
-            votre expert-comptable qui la fournit — il faut vérifier, pas
+            votre expert-comptable qui la fournit : il faut vérifier, pas
             supposer.
           </p>
 

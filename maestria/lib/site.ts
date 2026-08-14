@@ -76,6 +76,44 @@ export const realisations = [
   },
 ] as const;
 
+/** Mentions légales.
+ *
+ *  Obligatoires en France pour un site professionnel : article 6-III de la loi
+ *  pour la confiance dans l'économie numérique (LCEN) et article R123-237 du
+ *  code de commerce. L'absence de ces mentions est passible d'une amende.
+ *
+ *  ⚠️ Les valeurs marquées À CONFIRMER doivent être renseignées AVANT toute
+ *  mise en ligne publique. Je ne peux pas les inventer : ce sont des données
+ *  d'état civil et d'immatriculation.
+ */
+export const legal = {
+  /** Nom et prénom de la personne physique qui édite le site. */
+  editeur: "Mathis Flason",
+
+  /** Statut : micro-entrepreneur, EI, société… */
+  statut: "{{À CONFIRMER PAR MAT}}",
+
+  /** Adresse de l'établissement ou du domicile professionnel. */
+  adresse: "{{À CONFIRMER PAR MAT}}",
+
+  /** SIREN (9 chiffres) ou SIRET (14 chiffres), délivré à l'immatriculation. */
+  siret: "{{À CONFIRMER PAR MAT}}",
+
+  /** Registre d'immatriculation : RCS + ville pour un commerçant, RM pour un
+   *  artisan, ou « non applicable » si profession libérale non inscrite. */
+  registre: "{{À CONFIRMER PAR MAT}}",
+
+  /** Si assujetti : le numéro FR… Sinon laisser la mention de franchise, qui
+   *  est elle aussi une mention obligatoire sur les documents commerciaux. */
+  tva: "TVA non applicable, article 293 B du code général des impôts",
+
+  /** Nom, raison sociale et adresse de l'hébergeur, avec son téléphone. */
+  hebergeur: "{{À CONFIRMER PAR MAT}}",
+
+  /** Date de dernière mise à jour de cette page. */
+  miseAJour: "9 août 2026",
+} as const;
+
 /** Tarifs — PROPOSITION à valider par Mat.
  *
  *  Raisonnement : une automatisation type demande une vingtaine d'heures de

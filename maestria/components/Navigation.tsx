@@ -3,7 +3,7 @@ import { whatsappUrl, site } from "@/lib/site";
 
 /** Deux pages, deux entrées. Pas de menu hamburger : sur mobile on garde le
  *  strict nécessaire — le nom, l'autre page, et WhatsApp. */
-export function Navigation({ page }: { page: "auto" | "sites" }) {
+export function Navigation({ page }: { page: "auto" | "sites" | "aucune" }) {
   const actif = "text-[var(--color-text-inverse)]";
   const inactif =
     "text-[var(--color-text-inverse-muted)] hover:text-[var(--color-text-inverse)]";

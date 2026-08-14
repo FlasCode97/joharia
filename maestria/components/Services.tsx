@@ -14,7 +14,7 @@ export function Services() {
           <p>
             Une page : votre nom, ce que vous faites, où vous êtes, vos
             horaires, vos prix, votre numéro. Elle s&apos;ouvre vite depuis un
-            téléphone, même avec du réseau moyen — c&apos;est la première chose
+            téléphone, même avec du réseau moyen : c&apos;est la première chose
             que je vérifie avant de livrer.
           </p>
           <p>

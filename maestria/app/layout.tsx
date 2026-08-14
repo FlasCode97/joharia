@@ -15,11 +15,11 @@ const archivo = Archivo({
 });
 
 export const metadata: Metadata = {
-  title: "Johària — Sites internet pour les commerces de Guadeloupe",
+  title: "Johària, sites internet pour les commerces de Guadeloupe",
   description:
     "Je crée des sites pour les commerces et les artisans de Guadeloupe et j'automatise les tâches répétitives. Un seul interlocuteur, hébergement compris.",
   openGraph: {
-    title: "Johària — Sites internet pour les commerces de Guadeloupe",
+    title: "Johària, sites internet pour les commerces de Guadeloupe",
     description:
       "Un site qu'on trouve quand on vous cherche, et les tâches répétitives en moins. Guadeloupe.",
     type: "website",
@@ -41,7 +41,7 @@ export default function RootLayout({
       <head>
         {/* Lu AVANT peinture : si le visiteur a déjà fermé le bandeau, il n'est
             jamais dessiné. Sans ça, on peindrait le bandeau puis on le
-            retirerait au montage — un décalage visible à chaque visite. */}
+            retirerait au montage, soit un décalage visible à chaque visite. */}
         <script
           dangerouslySetInnerHTML={{
             __html: `document.documentElement.classList.add('js');try{if(localStorage.getItem('joharia:echeance-facture')==='masquee')document.documentElement.setAttribute('data-echeance','masquee')}catch(e){}`,

@@ -17,31 +17,31 @@ const REGLES: { mots: string[]; lignes: Ligne[] }[] = [
   {
     mots: ["vidange", "huile", "5w40", "5w30"],
     lignes: [
-      { libelle: "Huile moteur 5W40 — 5 L", montant: 68 },
+      { libelle: "Huile moteur 5W40 (5 L)", montant: 68 },
       { libelle: "Filtre à huile", montant: 14 },
-      { libelle: "Main d'œuvre — 0,5 h", montant: 35 },
+      { libelle: "Main d'œuvre (0,5 h)", montant: 35 },
     ],
   },
   {
     mots: ["frein", "plaquette", "disque", "grince"],
     lignes: [
       { libelle: "Plaquettes de frein avant", montant: 78 },
-      { libelle: "Main d'œuvre — 1 h", montant: 70 },
+      { libelle: "Main d'œuvre (1 h)", montant: 70 },
     ],
   },
   {
     mots: ["pneu", "crevé", "creve", "roue"],
     lignes: [
-      { libelle: "Pneu 195/65 R15 — 2 unités", montant: 164 },
+      { libelle: "Pneu 195/65 R15 (2 unités)", montant: 164 },
       { libelle: "Montage et équilibrage", montant: 40 },
     ],
   },
   {
     mots: ["révision", "revision", "entretien", "contrôle", "controle"],
     lignes: [
-      { libelle: "Révision complète — 30 points", montant: 145 },
+      { libelle: "Révision complète (30 points)", montant: 145 },
       { libelle: "Filtre à air et filtre habitacle", montant: 46 },
-      { libelle: "Main d'œuvre — 1,5 h", montant: 105 },
+      { libelle: "Main d'œuvre (1,5 h)", montant: 105 },
     ],
   },
   {
@@ -54,7 +54,7 @@ const REGLES: { mots: string[]; lignes: Ligne[] }[] = [
 ];
 
 const PAR_DEFAUT: Ligne[] = [
-  { libelle: "Diagnostic atelier — 1 h", montant: 45 },
+  { libelle: "Diagnostic atelier (1 h)", montant: 45 },
 ];
 
 /* TVA de Guadeloupe : 8,5 % au taux normal, et non 20 % comme en métropole.

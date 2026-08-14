@@ -41,7 +41,7 @@ export function Automatisation() {
             Dans un garage où je suis passé, les factures s&apos;empilent sur le
             bureau de la secrétaire. Elles ne sont pas en retard : elles
             attendent simplement qu&apos;une personne les reprenne une par une.
-            C&apos;est ça, la tâche qui déborde — elle n&apos;est jamais
+            C&apos;est ça, la tâche qui déborde : elle n&apos;est jamais
             urgente, et elle revient tous les jours.
           </p>
 
@@ -61,7 +61,7 @@ export function Automatisation() {
                   <span className="font-[family-name:var(--font-display)] text-[1.15rem] font-semibold leading-snug">
                     {t.quoi}{" "}
                     <span className="font-[family-name:var(--font-body)] text-[0.9rem] font-normal text-[var(--color-text-muted)]">
-                      — {t.ou}
+                      {t.ou}
                     </span>
                   </span>
                   <span className="shrink-0 font-[family-name:var(--font-display)] text-[1.05rem] font-semibold tabular-nums text-[var(--color-action)]">

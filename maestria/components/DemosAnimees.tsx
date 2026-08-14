@@ -50,7 +50,7 @@ export function DemoRelance() {
 }
 
 const messages = [
-  { objet: "Facture Sogedis — août", vers: "Compta" },
+  { objet: "Facture Sogedis, août", vers: "Compta" },
   { objet: "Vous avez de la place samedi soir ?", vers: "À répondre" },
   { objet: "Newsletter fournisseur boissons", vers: "Archive" },
   { objet: "Relance impayé table 12", vers: "Compta" },
