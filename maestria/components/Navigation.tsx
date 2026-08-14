@@ -1,48 +1,46 @@
+import Link from "next/link";
 import { whatsappUrl, site } from "@/lib/site";
 
-const links = [
-  { label: "Un site", href: "#ce-que-je-fais" },
-  { label: "Vos tâches", href: "#automatisation" },
-  { label: "Réalisation", href: "#realisation" },
-  { label: "Comment ça se passe", href: "#comment" },
-];
+/** Deux pages, deux entrées. Pas de menu hamburger : sur mobile on garde le
+ *  strict nécessaire — le nom, l'autre page, et WhatsApp. */
+export function Navigation({ page }: { page: "auto" | "sites" }) {
+  const actif = "text-[var(--color-text-inverse)]";
+  const inactif =
+    "text-[var(--color-text-inverse-muted)] hover:text-[var(--color-text-inverse)]";
 
-/** Pas de menu hamburger : trois ancres sur une page courte ne justifient pas
- *  un panneau plein écran. Sur mobile, seul le bouton WhatsApp reste — c'est
- *  la seule action qui compte. */
-export function Navigation() {
   return (
     <header className="on-dark relative z-50 bg-[var(--color-surface-inverse)]">
       <nav
         aria-label="Navigation principale"
-        className="mx-auto flex max-w-[78rem] items-center justify-between gap-6 px-6 py-5 md:px-12"
+        className="mx-auto flex max-w-[78rem] items-center justify-between gap-4 px-6 py-5 md:px-12"
       >
-        <a
-          href="#top"
-          className="tap font-[family-name:var(--font-display)] text-xl font-semibold tracking-tight text-[var(--color-text-inverse)]"
+        <Link
+          href="/"
+          className="tap shrink-0 font-[family-name:var(--font-display)] text-xl font-semibold tracking-tight text-[var(--color-text-inverse)]"
         >
           {site.name}
-        </a>
+        </Link>
 
-        <div className="flex items-center gap-8">
-          <ul className="hidden items-center gap-8 md:flex">
-            {links.map((l) => (
-              <li key={l.href}>
-                <a
-                  href={l.href}
-                  className="tap text-[0.9375rem] text-[var(--color-text-inverse-muted)] underline-offset-4 transition-colors duration-150 hover:text-[var(--color-text-inverse)] hover:underline active:opacity-70"
-                >
-                  {l.label}
-                </a>
-              </li>
-            ))}
-          </ul>
-
+        <div className="flex items-center gap-5 sm:gap-7">
+          <Link
+            href="/"
+            aria-current={page === "auto" ? "page" : undefined}
+            className={`tap text-[0.875rem] underline-offset-4 transition-colors duration-150 hover:underline active:opacity-70 sm:text-[0.9375rem] ${page === "auto" ? actif : inactif}`}
+          >
+            Automatisation
+          </Link>
+          <Link
+            href="/sites-web"
+            aria-current={page === "sites" ? "page" : undefined}
+            className={`tap text-[0.875rem] underline-offset-4 transition-colors duration-150 hover:underline active:opacity-70 sm:text-[0.9375rem] ${page === "sites" ? actif : inactif}`}
+          >
+            Sites web
+          </Link>
           <a
             href={whatsappUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="tap text-[0.9375rem] font-semibold text-[var(--color-action-inverse)] underline-offset-4 transition-colors duration-150 hover:underline active:opacity-70"
+            className="tap text-[0.875rem] font-semibold text-[var(--color-action-inverse)] underline-offset-4 transition-colors duration-150 hover:underline active:opacity-70 sm:text-[0.9375rem]"
           >
             WhatsApp
           </a>

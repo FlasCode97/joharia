@@ -37,15 +37,58 @@ export const whatsappFacturation = lien(
 
 export const mailtoUrl = `mailto:${site.email}`;
 
-/** La seule réalisation livrée et payée à ce jour. */
-export const dylan = {
-  name: "Dylan Etonno",
-  metier: "graphiste, monteur vidéo et community manager",
-  url: "https://dylan-etonno.pages.dev",
-  livraison: "le 5 août 2026",
-  capture: "/realisations/dylan-etonno.webp",
-  captureLargeur: 390,
-  captureHauteur: 844,
+/** Les sites livrés et payés. Rien d'autre ne figure comme réalisation :
+ *  Auto Center Services reste une maquette non commandée, jamais publiée. */
+export const CAPTURE_L = 390;
+export const CAPTURE_H = 844;
+
+export const realisations = [
+  {
+    slug: "domaine-de-richard",
+    nom: "Domaine de Richard",
+    quoi: "deux bungalows à Saint-Louis, Marie-Galante",
+    url: "https://domaine-de-richard.pages.dev",
+    livraison: "le 8 août 2026",
+    capture: "/realisations/domaine-de-richard.webp",
+    // Ce qui est vérifiable en ouvrant le lien, rien de plus.
+    contenu: [
+      "Les deux logements, avec leur prix à la nuit, ce qu'il y a dedans, et pour combien de personnes.",
+      "Les horaires d'arrivée et de départ, le stationnement, la piscine.",
+      "Un bouton qui ouvre WhatsApp pour réserver, le téléphone, et le plan pour venir.",
+    ],
+    apport:
+      "Tout ce qu'on lui demandait au téléphone est maintenant sur la page. Il n'a plus à répéter les mêmes informations à chaque personne qui appelle.",
+  },
+  {
+    slug: "dylan-etonno",
+    nom: "Dylan Etonno",
+    quoi: "graphiste, monteur vidéo et community manager",
+    url: "https://dylan-etonno.pages.dev",
+    livraison: "le 5 août 2026",
+    capture: "/realisations/dylan-etonno.webp",
+    contenu: [
+      "Ses travaux, ses catalogues et ses œuvres, sur une seule page.",
+      "Deux publications de 26 et 14 pages, des réalisations pour la Médiathèque du Lamentin et Cyber-Corsaire.",
+      "Le contact en bas, sans formulaire compliqué.",
+    ],
+    apport:
+      "Son travail vivait dans des fichiers. Il tient maintenant dans un lien qu'il envoie à un recruteur.",
+  },
+] as const;
+
+/** Tarifs — PROPOSITION à valider par Mat.
+ *
+ *  Raisonnement : une automatisation type demande une vingtaine d'heures de
+ *  travail réel, livrée en trois semaines. Face au calcul de la page — un
+ *  artisan qui perd 130 h par an à 35 €/h, soit 4 550 € — l'installation est
+ *  remboursée en moins de quatre mois. Assez haut pour que le travail soit
+ *  payé, assez bas pour décider un patron de TPE sans réunion.
+ *
+ *  Ces deux nombres sont le seul endroit à changer. */
+export const tarifs = {
+  installation: 1200,
+  mensuel: 70,
+  delai: "trois semaines",
 } as const;
 
 /** Réforme de la facturation électronique — faits vérifiés le 9 août 2026 sur

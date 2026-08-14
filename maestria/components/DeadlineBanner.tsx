@@ -38,8 +38,8 @@ export function DeadlineBanner() {
           </span>{" "}
           : vous devrez pouvoir recevoir vos factures au format électronique.{" "}
           <a
-            href="#automatisation"
-            className="whitespace-nowrap text-[var(--color-action-inverse)] underline underline-offset-2 hover:decoration-2 active:opacity-70"
+            href="#facture-electronique"
+            className="tap whitespace-nowrap text-[var(--color-action-inverse)] underline underline-offset-2 hover:decoration-2 active:opacity-70"
           >
             Ce que ça change
           </a>
@@ -49,7 +49,7 @@ export function DeadlineBanner() {
           type="button"
           onClick={fermer}
           aria-label="Masquer ce bandeau"
-          className="-my-2 shrink-0 px-2 py-2 text-[var(--color-text-inverse-muted)] transition-colors duration-150 hover:text-[var(--color-text-inverse)] active:opacity-70"
+          className="tap -my-2 shrink-0 justify-center px-3 py-2 text-[var(--color-text-inverse-muted)] transition-colors duration-150 hover:text-[var(--color-text-inverse)] active:opacity-70"
         >
           <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true">
             <path

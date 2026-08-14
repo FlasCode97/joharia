@@ -1,26 +1,22 @@
 import type { Metadata } from "next";
-import { DeadlineBanner } from "@/components/DeadlineBanner";
 import { BarreWhatsApp } from "@/components/BarreWhatsApp";
 import { PauseHorsChamp } from "@/components/PauseHorsChamp";
 import { RevelerAuScroll } from "@/components/RevelerAuScroll";
 import { Navigation } from "@/components/Navigation";
-import { Hero } from "@/components/Hero";
-import { Automatisation } from "@/components/Automatisation";
-import { Demonstrations } from "@/components/Demonstrations";
-import { ChezMoi } from "@/components/ChezMoi";
-import { Tarifs } from "@/components/Tarifs";
-import { ProcessAuto } from "@/components/Process";
-import { Facturation } from "@/components/Facturation";
+import { HeroSites } from "@/components/HeroSites";
+import { Services } from "@/components/Services";
+import { Realisations } from "@/components/Realisations";
+import { ProcessSite } from "@/components/Process";
 import { Contact } from "@/components/Contact";
 import { SiteFooter } from "@/components/SiteFooter";
 
 export const metadata: Metadata = {
-  title: "Johària — Automatiser les tâches qui vous gardent au bureau",
+  title: "Johària — Sites internet pour les commerces de Guadeloupe",
   description:
-    "Devis, relances, messages, factures : je fabrique des machines qui les font à votre place. Pour les commerces et artisans de Guadeloupe.",
+    "Une page qui dit qui vous êtes, où vous êtes et combien ça coûte. Livrée, hébergée, rapide sur téléphone. Deux sites livrés, visibles en ligne.",
 };
 
-export default function Home() {
+export default function SitesWeb() {
   return (
     <>
       <a
@@ -30,16 +26,12 @@ export default function Home() {
         Aller au contenu
       </a>
       <div id="top" className="relative w-full overflow-x-hidden">
-        <DeadlineBanner />
-        <Navigation page="auto" />
-        <Hero />
+        <Navigation page="sites" />
+        <HeroSites />
         <main id="contenu">
-          <Automatisation />
-          <Demonstrations />
-          <ChezMoi />
-          <Tarifs />
-          <ProcessAuto />
-          <Facturation />
+          <Services />
+          <Realisations />
+          <ProcessSite />
           <Contact />
         </main>
         <SiteFooter />

@@ -21,8 +21,8 @@ const etapesSite = [
 ];
 
 /* Le parcours automatisation ne part pas d'une page à fabriquer mais d'une
-   tâche à décrire. Première étape différente, et une étape de surveillance
-   à la fin qui n'existe pas pour un site. */
+   tâche à décrire, et se termine par la surveillance — qui n'existe pas pour
+   un site. */
 const etapesAuto = [
   {
     titre: "Vous me montrez la tâche, telle que vous la faites",
@@ -47,40 +47,35 @@ const etapesAuto = [
 ];
 
 /** Séquences ordonnées sémantiquement (<ol> pour les lecteurs d'écran), mais
- *  sans numéros affichés : la hiérarchie passe par les filets, comme partout
- *  ailleurs sur la page. */
-export function Process() {
+ *  sans numéros affichés : la hiérarchie passe par le trait et les points. */
+export function ProcessAuto() {
   return (
     <section id="comment" className="band">
       <div className="band-inner">
         <p className="band-label">Comment ça se passe</p>
-
         <div className="band-col">
-          <h2>Du premier message à la mise en ligne</h2>
-          <p>Pour un site.</p>
-          <Etapes etapes={etapesSite} />
+          <h2>D&apos;une tâche que vous décrivez à une machine qui la fait</h2>
+          <Etapes etapes={etapesAuto} />
         </div>
       </div>
+    </section>
+  );
+}
 
-      <div className="border-t border-[var(--color-border)] bg-[var(--color-surface-raised)]">
-        <div className="band-inner">
-          <p className="band-label">Et pour une tâche</p>
-          <div className="band-col">
-            <h3 className="!mt-0">
-              Quand il s&apos;agit d&apos;arrêter de refaire la même chose
-            </h3>
-            <p>
-              Le parcours n&apos;est pas le même : on ne part pas d&apos;une page
-              à fabriquer, mais d&apos;une tâche que vous faites déjà.
-            </p>
-            <Etapes etapes={etapesAuto} />
+export function ProcessSite() {
+  return (
+    <section id="comment" className="band">
+      <div className="band-inner">
+        <p className="band-label">Comment ça se passe</p>
+        <div className="band-col">
+          <h2>Du premier message à la mise en ligne</h2>
+          <Etapes etapes={etapesSite} />
 
-            <p className="!mt-10 font-[family-name:var(--font-display)] text-[1.35rem] leading-snug !text-[var(--color-text)]">
-              Si vous hésitez, je peux fabriquer une première version de votre
-              site avant que vous décidiez quoi que ce soit. Vous la regardez, et
-              vous me dites oui ou non.
-            </p>
-          </div>
+          <p className="!mt-10 font-[family-name:var(--font-display)] text-[1.35rem] leading-snug !text-[var(--color-text)]">
+            Si vous hésitez, je peux fabriquer une première version de votre
+            site avant que vous décidiez quoi que ce soit. Vous la regardez, et
+            vous me dites oui ou non.
+          </p>
         </div>
       </div>
     </section>

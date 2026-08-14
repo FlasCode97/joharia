@@ -265,6 +265,49 @@
   }
 
   /* -------------------------------------------------------------
+     Séquences démonstratives : chaque ligne apparaît à son tour, en
+     boucle lente, pour montrer un déroulé dans le temps. Mise en pause
+     hors viewport comme tout le reste.
+     ------------------------------------------------------------- */
+
+  html.js .sequence-item {
+    opacity: 0.2;
+    animation: sequence-apparaitre 9s var(--ease-fluid) infinite;
+  }
+
+  html.js .sequence-item-1 { animation-delay: 0s; }
+  html.js .sequence-item-2 { animation-delay: 1.1s; }
+  html.js .sequence-item-3 { animation-delay: 2.2s; }
+  html.js .sequence-item-4 { animation-delay: 3.3s; }
+
+  html.js .sequence-etiquette {
+    opacity: 0;
+    animation: sequence-etiquette 9s var(--ease-fluid) infinite;
+  }
+
+  html.js .sequence-item-1 .sequence-etiquette { animation-delay: 0.35s; }
+  html.js .sequence-item-2 .sequence-etiquette { animation-delay: 1.45s; }
+  html.js .sequence-item-3 .sequence-etiquette { animation-delay: 2.55s; }
+  html.js .sequence-item-4 .sequence-etiquette { animation-delay: 3.65s; }
+
+  @keyframes sequence-apparaitre {
+    0% { opacity: 0.2; }
+    6%, 88% { opacity: 1; }
+    100% { opacity: 0.2; }
+  }
+
+  @keyframes sequence-etiquette {
+    0% { opacity: 0; transform: translateX(6px); }
+    7%, 88% { opacity: 1; transform: none; }
+    100% { opacity: 0; transform: translateX(6px); }
+  }
+
+  .hors-champ .sequence-item,
+  .hors-champ .sequence-etiquette {
+    animation-play-state: paused;
+  }
+
+  /* -------------------------------------------------------------
      Révélation générique au scroll. Discrète par construction : si on la
      remarque, c'est raté. Jamais sur un H1 ni sur un bouton — on ne
      retarde ni le message principal ni un appel à l'action.
@@ -600,7 +643,9 @@
   }
   .reveal > *,
   .apres-auto,
-  .etapes > li::before {
+  .etapes > li::before,
+  .sequence-item,
+  .sequence-etiquette {
     opacity: 1 !important;
     transform: none !important;
   }

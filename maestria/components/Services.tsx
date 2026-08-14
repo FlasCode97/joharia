@@ -1,36 +1,29 @@
+import { tarifs } from "@/lib/site";
+
+/** Page sites web : ce que contient un site, et l'abonnement de mise à jour.
+ *  L'abonnement vaut aussi pour l'automatisation — c'est la même logique de
+ *  surveillance, il est donc mentionné des deux côtés. */
 export function Services() {
   return (
     <section id="ce-que-je-fais" className="band">
       <div className="band-inner">
-        <p className="band-label">Ce que je résous</p>
+        <p className="band-label">Ce que vous obtenez</p>
 
         <div className="band-col">
-          <h2>
-            Le problème n&apos;est pas votre travail. C&apos;est tout ce
-            qu&apos;il y a autour.
-          </h2>
-
-          <h3>Être trouvé quand on vous cherche</h3>
+          <h2>Être trouvé quand on vous cherche</h2>
           <p>
-            Une page : votre nom, ce que vous faites, où vous êtes, vos horaires,
-            votre numéro. Elle s&apos;ouvre vite depuis un téléphone, même avec du
-            réseau moyen — c&apos;est la première chose que je vérifie avant de
-            livrer. Je l&apos;héberge, vous n&apos;avez pas d&apos;abonnement pour
-            ça.
+            Une page : votre nom, ce que vous faites, où vous êtes, vos
+            horaires, vos prix, votre numéro. Elle s&apos;ouvre vite depuis un
+            téléphone, même avec du réseau moyen — c&apos;est la première chose
+            que je vérifie avant de livrer.
           </p>
-
-          <h3>Les tâches que vous refaites chaque semaine</h3>
           <p>
-            Recopier un devis, relancer ceux qui n&apos;ont pas répondu, ressortir
-            un document, renvoyer les mêmes informations à chaque nouveau client.
-            Une machine fait ça correctement, à condition que quelqu&apos;un
-            prenne le temps de le décrire une fois. C&apos;est ce que je fais.
+            Je l&apos;héberge. Vous n&apos;avez pas d&apos;abonnement mensuel
+            obligatoire pour la garder en ligne.
           </p>
         </div>
       </div>
 
-      {/* L'abonnement est l'offre principale : il sort de la colonne courante
-          et prend un encart pleine largeur pour peser plus lourd à l'œil. */}
       <div className="border-t border-[var(--color-border)] bg-[var(--color-surface-raised)]">
         <div className="band-inner">
           <p className="band-label">L&apos;abonnement</p>
@@ -43,10 +36,14 @@ export function Services() {
               dernière, et ça se voit.
             </p>
             <p>
-              L&apos;abonnement, c&apos;est ça : chaque mois je regarde ce qui a
-              bougé, je mets à jour, je publie. Vous m&apos;envoyez un vocal
-              WhatsApp entre deux clients, je m&apos;occupe du reste. Pas de
-              réunion, pas de compte-rendu.
+              Chaque mois je regarde ce qui a bougé, je mets à jour, je publie.
+              Vous m&apos;envoyez un vocal WhatsApp entre deux clients, je
+              m&apos;occupe du reste. Pas de réunion, pas de compte-rendu.
+            </p>
+            <p className="!text-[var(--color-text)]">
+              {tarifs.mensuel} € par mois, sans engagement de durée. C&apos;est
+              le même abonnement qui couvre la surveillance d&apos;une
+              automatisation, si vous avez les deux.
             </p>
           </div>
         </div>
