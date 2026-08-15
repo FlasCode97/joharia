@@ -1,15 +1,34 @@
 import { facturation, whatsappFacturation } from "@/lib/site";
 
-/** Cible du lien du bandeau d'échéance. Factuel et borné : en 2026 il s'agit
- *  de RECEVOIR, pas d'émettre — confondre les deux serait vendre par la peur
- *  sur un point juridiquement faux. */
+/** Placée en toute fin de page, après le contact.
+ *
+ *  Elle était en accroche : ça déclenchait l'objection « j'ai un comptable »
+ *  avant que le visiteur ait lu l'offre. En bas, elle ne vend rien, elle
+ *  rend service. Le contenu est juste et il sert, il ne bouge pas.
+ *
+ *  Factuel et borné : en 2026 l'obligation porte sur la RÉCEPTION, pas sur
+ *  l'émission. Confondre les deux serait vendre par la peur sur un point
+ *  juridiquement faux.
+ *
+ *  Deux titres possibles, à trancher par Mat :
+ *    A — « Pendant qu'on y est »            (celui en place)
+ *    B — « Un point qui n'a rien à voir avec moi »
+ */
 export function Facturation() {
   return (
     <section id="facture-electronique" className="band">
       <div className="band-inner">
         <p className="band-label">Factures électroniques</p>
         <div className="band-col">
-          <h2>Ce qui change le {facturation.dateReception}</h2>
+          <h2>Pendant qu&apos;on y est</h2>
+
+          <p>
+            Ça ne me concerne pas et je n&apos;ai rien à y vendre. Mais
+            l&apos;information circule mal ici, alors autant qu&apos;elle soit
+            écrite quelque part.
+          </p>
+
+          <h3>Ce qui change le {facturation.dateReception}</h3>
 
           <p>
             À cette date, votre entreprise doit pouvoir{" "}

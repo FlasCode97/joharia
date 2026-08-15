@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { DeadlineBanner } from "@/components/DeadlineBanner";
 import { BarreWhatsApp } from "@/components/BarreWhatsApp";
 import { PauseHorsChamp } from "@/components/PauseHorsChamp";
 import { RevelerAuScroll } from "@/components/RevelerAuScroll";
@@ -30,17 +29,21 @@ export default function Home() {
         Aller au contenu
       </a>
       <div id="top" className="relative w-full overflow-x-hidden">
-        <DeadlineBanner />
         <Navigation page="auto" />
         <Hero />
+        {/* Les démonstrations passent juste après le hero : c'est le seul
+            actif de preuve du site, il doit être touchable sans effort.
+            La facturation électronique descend tout en bas, après le
+            contact : en accroche, elle déclenchait « j'ai un comptable »
+            avant que l'offre soit lue. */}
         <main id="contenu">
-          <Automatisation />
           <Demonstrations />
+          <Automatisation />
           <ChezMoi />
           <Tarifs />
           <ProcessAuto />
-          <Facturation />
           <Contact />
+          <Facturation />
         </main>
         <SiteFooter />
         <BarreWhatsApp />

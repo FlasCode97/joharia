@@ -39,12 +39,12 @@ export default function RootLayout({
   return (
     <html lang="fr" className={`${fraunces.variable} ${archivo.variable}`}>
       <head>
-        {/* Lu AVANT peinture : si le visiteur a déjà fermé le bandeau, il n'est
-            jamais dessiné. Sans ça, on peindrait le bandeau puis on le
-            retirerait au montage, soit un décalage visible à chaque visite. */}
+        {/* Posé AVANT peinture. Les états masqués des révélations au scroll
+            sont conditionnés à cette classe : sans JavaScript, rien n'est
+            caché et toute la copie reste lisible. */}
         <script
           dangerouslySetInnerHTML={{
-            __html: `document.documentElement.classList.add('js');try{if(localStorage.getItem('joharia:echeance-facture')==='masquee')document.documentElement.setAttribute('data-echeance','masquee')}catch(e){}`,
+            __html: `document.documentElement.classList.add('js')`,
           }}
         />
       </head>

@@ -58,12 +58,6 @@
     color: inherit;
   }
 
-  /* Bandeau d'échéance déjà fermé : masqué avant peinture par le script
-     inline du layout. Aucun décalage au chargement. */
-  html[data-echeance="masquee"] #bandeau-echeance {
-    display: none;
-  }
-
   :where(a, button, input, textarea, [tabindex]):focus-visible {
     outline: 2px solid var(--color-action);
     outline-offset: 3px;

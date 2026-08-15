@@ -27,14 +27,14 @@ export function Navigation({ page }: { page: "auto" | "sites" | "aucune" }) {
             aria-current={page === "auto" ? "page" : undefined}
             className={`tap text-[0.875rem] underline-offset-4 transition-colors duration-150 hover:underline active:opacity-70 sm:text-[0.9375rem] ${page === "auto" ? actif : inactif}`}
           >
-            Automatisation
+            Devis &amp; relances
           </Link>
           <Link
             href="/sites-web"
             aria-current={page === "sites" ? "page" : undefined}
             className={`tap text-[0.875rem] underline-offset-4 transition-colors duration-150 hover:underline active:opacity-70 sm:text-[0.9375rem] ${page === "sites" ? actif : inactif}`}
           >
-            Sites web
+            Site internet
           </Link>
           <a
             href={whatsappUrl}
