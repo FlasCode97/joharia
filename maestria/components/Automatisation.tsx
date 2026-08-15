@@ -29,13 +29,28 @@ export function Automatisation() {
   return (
     <section id="le-probleme" className="band">
       <div className="band-inner">
-        <p className="band-label">Le temps que ça prend</p>
+        <p className="band-label">Ce que ça vous coûte</p>
 
         <div className="band-col">
           <h2>
             Le problème n&apos;est pas votre travail. C&apos;est tout ce
             qu&apos;il y a autour.
           </h2>
+
+          {/* L'argent d'abord. Le temps est un argument secondaire : énoncé
+              en premier, il produit mécaniquement l'objection. */}
+          <p className="!text-[var(--color-text)]">
+            Un devis qui part trois jours trop tard, c&apos;est un devis que
+            quelqu&apos;un d&apos;autre a signé. Une facture que personne ne
+            relance, c&apos;est de l&apos;argent qui existe, qui vous
+            appartient, et qui dort chez quelqu&apos;un d&apos;autre. Un message
+            du dimanche soir auquel vous répondez lundi midi, c&apos;est un
+            client qui a appelé ailleurs le dimanche soir.
+          </p>
+
+          <p className="!text-[var(--color-text)]">
+            Le reste, c&apos;est du temps. Ça se compte aussi.
+          </p>
 
           <p>
             Dans un garage où je suis passé, les factures s&apos;empilent sur le
@@ -75,11 +90,6 @@ export function Automatisation() {
             ))}
           </dl>
 
-          <p className="!mt-8 font-[family-name:var(--font-display)] text-[1.3rem] leading-snug !text-[var(--color-text)]">
-            Et les impayés ne vous coûtent pas du temps. Ils vous coûtent de
-            l&apos;argent qui existe, qui vous appartient, et qui dort chez
-            quelqu&apos;un d&apos;autre parce que personne n&apos;a relancé.
-          </p>
         </div>
       </div>
 

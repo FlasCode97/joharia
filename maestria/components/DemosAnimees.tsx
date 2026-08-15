@@ -17,10 +17,39 @@ const etapesRelance = [
 ];
 
 export function DemoRelance() {
+  return <Chronologie etapes={etapesRelance} />;
+}
+
+/* Chronologie d'un impayé. C'est le poste où l'argent se perd vraiment :
+   pas au devis, à l'échéance, quand personne n'a rappelé. */
+const etapesImpaye = [
+  { quand: "Jour 0", quoi: "Facture envoyée, échéance à 30 jours.", auto: false },
+  { quand: "Jour 31", quoi: "Rien. Personne n'a eu le temps d'appeler.", auto: false },
+  {
+    quand: "Jour 32",
+    quoi: "Un rappel part tout seul, poliment, la facture en pièce jointe.",
+    auto: true,
+  },
+  { quand: "Jour 38", quoi: "Deuxième rappel, un ton plus ferme.", auto: true },
+  { quand: "Jour 40", quoi: "Virement reçu.", auto: false },
+];
+
+export function DemoImpaye() {
+  return <Chronologie etapes={etapesImpaye} />;
+}
+
+/** Chronologie datée, partagée par les démonstrations gîte et BTP. Chaque
+ *  ligne apparaît à son tour, en boucle lente, et les étapes machine portent
+ *  un marqueur. */
+function Chronologie({
+  etapes,
+}: {
+  etapes: { quand: string; quoi: string; auto: boolean }[];
+}) {
   return (
     <div data-pause-hors-champ className="sequence mt-6">
       <ol className="list-none">
-        {etapesRelance.map((e, i) => (
+        {etapes.map((e, i) => (
           <li
             key={e.quand + e.quoi}
             className={`sequence-item sequence-item-${i + 1} flex flex-wrap items-baseline gap-x-3 gap-y-1 border-t border-[var(--color-border)] py-3 first:border-t-0 first:pt-0`}
@@ -45,35 +74,6 @@ export function DemoRelance() {
           </li>
         ))}
       </ol>
-    </div>
-  );
-}
-
-const messages = [
-  { objet: "Facture Sogedis, août", vers: "Compta" },
-  { objet: "Vous avez de la place samedi soir ?", vers: "À répondre" },
-  { objet: "Newsletter fournisseur boissons", vers: "Archive" },
-  { objet: "Relance impayé table 12", vers: "Compta" },
-];
-
-export function DemoTri() {
-  return (
-    <div data-pause-hors-champ className="sequence mt-6">
-      <ul className="list-none">
-        {messages.map((m, i) => (
-          <li
-            key={m.objet}
-            className={`sequence-item sequence-item-${i + 1} flex flex-wrap items-center justify-between gap-x-4 gap-y-1 border-t border-[var(--color-border)] py-3 first:border-t-0 first:pt-0`}
-          >
-            <span className="min-w-0 text-[var(--color-text-muted)]">
-              {m.objet}
-            </span>
-            <span className="sequence-etiquette shrink-0 rounded-full bg-[var(--color-surface-pressed)] px-3 py-1 text-[0.8125rem] text-[var(--color-text)]">
-              {m.vers}
-            </span>
-          </li>
-        ))}
-      </ul>
     </div>
   );
 }

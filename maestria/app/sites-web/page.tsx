@@ -6,6 +6,8 @@ import { Navigation } from "@/components/Navigation";
 import { HeroSites } from "@/components/HeroSites";
 import { Services } from "@/components/Services";
 import { Realisations } from "@/components/Realisations";
+import { FabriquerDabord } from "@/components/FabriquerDabord";
+import { TarifsSite } from "@/components/TarifsSite";
 import { ProcessSite } from "@/components/Process";
 import { Contact } from "@/components/Contact";
 import { SiteFooter } from "@/components/SiteFooter";
@@ -31,6 +33,8 @@ export default function SitesWeb() {
         <main id="contenu">
           <Services />
           <Realisations />
+          <FabriquerDabord />
+          <TarifsSite />
           <ProcessSite />
           <Contact />
         </main>

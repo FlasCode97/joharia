@@ -108,14 +108,17 @@ export function CalculTemps() {
           passez, soit une machine le passe à votre place.
         </p>
 
-        <p className="mt-8">
+        <p className="mt-8 text-[0.9375rem] text-[var(--color-text-muted)]">
+          Dites-moi ce que vous refaites tous les jours.
+        </p>
+        <p className="mt-4">
           <a
             href={whatsappAutomatisation}
             target="_blank"
             rel="noopener noreferrer"
             className="gem"
           >
-            Me dire ce qui vous prend le plus de temps
+            Écrire sur WhatsApp
           </a>
         </p>
       </div>

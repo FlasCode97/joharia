@@ -31,6 +31,10 @@ export const whatsappAutomatisation = lien(
   "Bonjour, je vous écris depuis votre site. La tâche qui me prend le plus de temps, c'est : "
 );
 
+export const whatsappConstruire = lien(
+  "Bonjour, je vous écris depuis votre site. La tâche que je voudrais vous voir construire, c'est : "
+);
+
 export const whatsappFacturation = lien(
   "Bonjour, je vous écris depuis votre site au sujet des factures électroniques. Mon activité : "
 );
@@ -136,6 +140,10 @@ export const tarifs = {
   installation: 1200,
   mensuel: 70,
   delai: "trois semaines",
+
+  /** Prix d'un site vitrine, en une fois.
+   *  {{À CONFIRMER PAR MAT — prix du site vitrine}} */
+  site: "{{À CONFIRMER PAR MAT}}",
 } as const;
 
 /** Réforme de la facturation électronique — faits vérifiés le 9 août 2026 sur

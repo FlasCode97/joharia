@@ -2,15 +2,35 @@ import Link from "next/link";
 import { ChaineAutomatisation } from "./ChaineAutomatisation";
 import { whatsappAutomatisation } from "@/lib/site";
 
-/** Hero de la page principale — l'automatisation.
+/** Hero de la page principale.
  *
- *  L'accroche est celle qui a le mieux tenu au test de substitution : deux
- *  chiffres, un écart, aucune explication. L'inconfort est dans le blanc
- *  entre les deux phrases. Elle serait fausse sur le site d'un éditeur de
- *  logiciel, ce qui est exactement ce qu'on cherche.
+ *  L'accroche tient au test de substitution : deux chiffres, un écart, aucune
+ *  explication. L'inconfort est dans le blanc entre les deux phrases. Elle
+ *  serait fausse sur le site d'un éditeur de logiciel.
+ *
+ *  Le sous-titre ne parle pas de temps gagné. Le temps est un argument
+ *  secondaire, et énoncé trop tôt il produit l'objection. L'argument est
+ *  l'argent : un devis parti trop tard est un devis signé par un autre.
+ *
+ *  TROIS VARIANTES. C est en place. Pour changer, remplacer le H1 et le
+ *  paragraphe par le bloc voulu.
+ *
+ *  A — Il vous a écrit dimanche soir. Vous avez répondu lundi midi.
+ *      Il avait déjà appelé ailleurs.
+ *      « Je fabrique les machines qui répondent, sortent les devis et
+ *        relancent les impayés à votre place. Sur votre numéro, à toute
+ *        heure. En Guadeloupe, un seul interlocuteur : moi. »
+ *
+ *  B — Vous avez de l'argent chez vos clients.
+ *      Personne ne l'a relancé.
+ *      « Les devis qui traînent, les factures que personne ne rappelle, les
+ *        messages sans réponse le dimanche. Je fabrique les machines qui
+ *        s'en occupent pendant que vous travaillez. »
+ *
+ *  C — Vous fermez à 19 h. Vous finissez à 22 h.            ← en place
  *
  *  Le texte est rendu côté serveur et n'est jamais recouvert par la chaîne,
- *  qui occupe sa propre colonne — contraste garanti en toutes circonstances. */
+ *  qui occupe sa propre colonne : contraste garanti en toutes circonstances. */
 export function Hero() {
   return (
     <section className="on-dark relative bg-[var(--color-surface-inverse)] text-[var(--color-text-inverse)]">
@@ -25,13 +45,27 @@ export function Hero() {
           </h1>
 
           <p className="mt-6 max-w-[34rem] text-[1.0625rem] leading-relaxed text-[var(--color-text-inverse-muted)] text-pretty md:text-lg">
-            Je fabrique des machines qui font à votre place ce que vous refaites
-            chaque semaine : les devis, les relances, les messages auxquels vous
-            répondez pour la trentième fois. En Guadeloupe, un seul
-            interlocuteur.
+            Et le devis que vous ferez ce soir, votre client l&apos;attend
+            depuis mardi : il a demandé ailleurs entre-temps. Je fabrique les
+            machines qui le sortent en dix minutes, relancent ce qu&apos;on
+            vous doit, et répondent aux mêmes questions à votre place.
           </p>
 
-          <ul className="mt-7 flex flex-col gap-x-6 gap-y-2 sm:flex-row sm:flex-wrap">
+          {/* L'action principale passe avant les deux liens secondaires :
+              sur un téléphone, le bouton doit arriver le plus tôt possible
+              dans la lecture. */}
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
+            <a
+              href={whatsappAutomatisation}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="gem"
+            >
+              Écrire sur WhatsApp
+            </a>
+          </div>
+
+          <ul className="mt-6 flex flex-col gap-x-6 gap-y-2 sm:flex-row sm:flex-wrap">
             <li>
               <a
                 href="#demonstrations"
@@ -55,17 +89,6 @@ export function Hero() {
               </Link>
             </li>
           </ul>
-
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
-            <a
-              href={whatsappAutomatisation}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="gem"
-            >
-              Écrire sur WhatsApp
-            </a>
-          </div>
         </div>
 
         {/* La chaîne : message reçu → lu → devis envoyé → relance prévue.

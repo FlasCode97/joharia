@@ -1,8 +1,9 @@
-import { tarifs, whatsappAutomatisation } from "@/lib/site";
+import { tarifs, whatsappUrl } from "@/lib/site";
 
-/** Le prix est affiché. C'est rare dans ce métier, et c'est précisément ce
- *  qui rassure un patron de TPE : il sait avant d'appeler. */
-export function Tarifs() {
+/** La page promettait « un prix ferme, pas une fourchette » sans jamais
+ *  donner de chiffre, alors que la page devis affiche les siens. Même
+ *  construction que celle-là, pour que les deux offres se lisent pareil. */
+export function TarifsSite() {
   return (
     <section id="prix" className="band">
       <div className="band-inner">
@@ -15,28 +16,26 @@ export function Tarifs() {
             <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 border-t border-[var(--color-border)] py-5 first:border-t-0 first:pt-0">
               <dt>
                 <span className="font-[family-name:var(--font-display)] text-[1.15rem] font-semibold">
-                  Installation
+                  Le site
                 </span>
                 <span className="mt-1 block text-[0.9375rem] text-[var(--color-text-muted)]">
-                  Une automatisation, décrite avec vous, construite, testée sur
-                  vos vrais dossiers et mise en route. Livrée en{" "}
-                  {tarifs.delai} au maximum.
+                  Écrit, fabriqué, mis en ligne et hébergé. Vous recevez le lien
+                  et vous pouvez l&apos;envoyer à vos clients le jour même.
                 </span>
               </dt>
               <dd className="font-[family-name:var(--font-display)] text-[2rem] font-semibold tabular-nums">
-                {tarifs.installation}&nbsp;€
+                {tarifs.site}
               </dd>
             </div>
 
             <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 border-t border-[var(--color-border)] py-5">
               <dt>
                 <span className="font-[family-name:var(--font-display)] text-[1.15rem] font-semibold">
-                  Surveillance
+                  Les mises à jour
                 </span>
                 <span className="mt-1 block text-[0.9375rem] text-[var(--color-text-muted)]">
-                  Je vérifie que ça tourne, je corrige quand ça casse,
-                  j&apos;ajuste quand votre activité change. Sans engagement de
-                  durée.
+                  Chaque mois, ce qui a bougé chez vous passe sur la page. Sans
+                  engagement de durée. Facultatif.
                 </span>
               </dt>
               <dd className="font-[family-name:var(--font-display)] text-[2rem] font-semibold tabular-nums">
@@ -48,16 +47,9 @@ export function Tarifs() {
             </div>
           </dl>
 
-          <p className="!mt-8 font-[family-name:var(--font-display)] text-[1.3rem] leading-snug !text-[var(--color-text)]">
-            Reprenez le calcul plus haut. Si vous perdez 130 heures par an,
-            l&apos;installation est remboursée avant la fin du quatrième mois.
-          </p>
-
-          <p className="!mt-6 text-[0.9375rem]">
-            La surveillance n&apos;est pas un supplément de confort. Une
-            automatisation qui s&apos;arrête sans prévenir est pire que pas
-            d&apos;automatisation du tout : vous croyez que c&apos;est fait, et
-            ça ne l&apos;est pas.
+          <p className="!mt-8 text-[0.9375rem]">
+            L&apos;hébergement est compris dans le prix du site. Vous
+            n&apos;avez pas d&apos;abonnement obligatoire pour rester en ligne.
           </p>
 
           <p className="!mt-8 text-[0.9375rem]">
@@ -65,7 +57,7 @@ export function Tarifs() {
           </p>
           <p className="!mt-4">
             <a
-              href={whatsappAutomatisation}
+              href={whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="gem"

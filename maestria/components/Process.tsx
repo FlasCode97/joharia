@@ -70,12 +70,6 @@ export function ProcessSite() {
         <div className="band-col">
           <h2>Du premier message à la mise en ligne</h2>
           <Etapes etapes={etapesSite} />
-
-          <p className="!mt-10 font-[family-name:var(--font-display)] text-[1.35rem] leading-snug !text-[var(--color-text)]">
-            Si vous hésitez, je peux fabriquer une première version de votre
-            site avant que vous décidiez quoi que ce soit. Vous la regardez, et
-            vous me dites oui ou non.
-          </p>
         </div>
       </div>
     </section>

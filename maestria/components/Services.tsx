@@ -1,5 +1,3 @@
-import { tarifs } from "@/lib/site";
-
 /** Page sites web : ce que contient un site, et l'abonnement de mise à jour.
  *  L'abonnement vaut aussi pour l'automatisation — c'est la même logique de
  *  surveillance, il est donc mentionné des deux côtés. */
@@ -41,9 +39,9 @@ export function Services() {
               m&apos;occupe du reste. Pas de réunion, pas de compte-rendu.
             </p>
             <p className="!text-[var(--color-text)]">
-              {tarifs.mensuel} € par mois, sans engagement de durée. C&apos;est
-              le même abonnement qui couvre la surveillance d&apos;une
-              automatisation, si vous avez les deux.
+              Sans engagement de durée, et facultatif. C&apos;est le même
+              abonnement qui couvre la surveillance d&apos;une automatisation,
+              si vous avez les deux. Le prix est plus bas.
             </p>
           </div>
         </div>

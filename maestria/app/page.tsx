@@ -6,6 +6,8 @@ import { Navigation } from "@/components/Navigation";
 import { Hero } from "@/components/Hero";
 import { Automatisation } from "@/components/Automatisation";
 import { Demonstrations } from "@/components/Demonstrations";
+import { ConstruireDabord } from "@/components/ConstruireDabord";
+import { QuiEnFace } from "@/components/QuiEnFace";
 import { ChezMoi } from "@/components/ChezMoi";
 import { Tarifs } from "@/components/Tarifs";
 import { ProcessAuto } from "@/components/Process";
@@ -14,9 +16,10 @@ import { Contact } from "@/components/Contact";
 import { SiteFooter } from "@/components/SiteFooter";
 
 export const metadata: Metadata = {
-  title: "Johària, automatiser les tâches qui vous gardent au bureau",
+  // Le titre nomme la tâche, jamais la catégorie technique.
+  title: "Johària, vos devis et vos relances faits à votre place",
   description:
-    "Devis, relances, messages, factures : je fabrique des machines qui les font à votre place. Pour les commerces et artisans de Guadeloupe.",
+    "Devis, relances d'impayés, réponses aux mêmes questions : je fabrique les machines qui s'en occupent pendant que vous travaillez. Guadeloupe.",
 };
 
 export default function Home() {
@@ -39,9 +42,11 @@ export default function Home() {
         <main id="contenu">
           <Demonstrations />
           <Automatisation />
+          <ConstruireDabord />
           <ChezMoi />
           <Tarifs />
           <ProcessAuto />
+          <QuiEnFace />
           <Contact />
           <Facturation />
         </main>

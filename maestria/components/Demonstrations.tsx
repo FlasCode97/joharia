@@ -1,12 +1,13 @@
 import { DemoDevis } from "./DemoDevis";
-import { DemoRelance, DemoTri } from "./DemosAnimees";
+import { DemoRelance, DemoImpaye } from "./DemosAnimees";
 import { whatsappAutomatisation } from "@/lib/site";
 
-/** Les démonstrations. Aucun client n'a encore commandé d'automatisation :
- *  ces trois blocs sont donc la preuve, à la place d'une référence. Le
- *  visiteur manipule le premier, regarde les deux autres.
+/** Placée juste après le hero : c'est le seul actif de preuve du site, et
+ *  personne n'a jamais vendu ça au visiteur. On ne nomme pas la catégorie
+ *  technique, on montre.
  *
- *  Trois secteurs différents, volontairement : garage, gîte, restaurant. */
+ *  Trois métiers qui font de vrais devis et courent après de vrais paiements :
+ *  garage (manipulable), gîte, artisan du bâtiment. */
 export function Demonstrations() {
   return (
     <section id="demonstrations" className="band">
@@ -16,15 +17,14 @@ export function Demonstrations() {
         <div className="band-col">
           <h2>Je préfère vous montrer</h2>
           <p>
-            Je n&apos;ai encore installé d&apos;automatisation chez aucun
-            client : c&apos;est nouveau dans ce que je propose. Alors plutôt
-            que de vous raconter ce que ça donnerait, voilà les machines.
-            Celle du dessous, vous pouvez l&apos;essayer.
+            Je n&apos;ai pas encore de client à vous citer. Alors je ne vous
+            raconte rien : essayez. Écrivez ce qu&apos;un de vos clients vous
+            écrirait. Le devis sort pendant que vous lisez cette phrase.
           </p>
         </div>
       </div>
 
-      {/* 1 — Manipulable. Garage. */}
+      {/* 1. Manipulable. Garage. */}
       <div className="border-t border-[var(--color-border)] bg-[var(--color-surface-raised)]">
         <div className="band-inner">
           <p className="band-label">Garage</p>
@@ -40,7 +40,7 @@ export function Demonstrations() {
         </div>
       </div>
 
-      {/* 2 — Animée. Gîte. */}
+      {/* 2. Animée. Gîte. */}
       <div className="border-t border-[var(--color-border)]">
         <div className="band-inner">
           <p className="band-label">Gîte</p>
@@ -57,29 +57,39 @@ export function Demonstrations() {
         </div>
       </div>
 
-      {/* 3 — Animée. Restaurant. */}
+      {/* 3. Animée. Artisan, BTP. Le poste où l'argent se perd vraiment. */}
       <div className="border-t border-[var(--color-border)] bg-[var(--color-surface-raised)]">
         <div className="band-inner">
-          <p className="band-label">Restaurant</p>
+          <p className="band-label">Artisan, BTP</p>
           <div className="band-col">
             <h3 className="!mt-0">
-              La boîte mail se range avant que vous l&apos;ouvriez
+              Le chantier est fini. La facture est partie. Trois semaines plus
+              tard, elle n&apos;est toujours pas payée.
             </h3>
             <p>
-              Ce qui demande une réponse d&apos;un côté, ce qui part à la
-              compta de l&apos;autre, le reste archivé. Vous n&apos;ouvrez que
-              la première pile.
+              C&apos;est le poste où l&apos;argent se perd vraiment. Pas au
+              moment du devis : à l&apos;échéance, quand personne n&apos;a
+              rappelé.
             </p>
-            <DemoTri />
+            <DemoImpaye />
 
-            <p className="!mt-8">
+            <p className="!mt-6 font-[family-name:var(--font-display)] text-[1.3rem] leading-snug !text-[var(--color-text)]">
+              Vous n&apos;avez passé aucun appel, et vous n&apos;avez pas eu à
+              jouer le mauvais rôle.
+            </p>
+
+            <p className="!mt-8 text-[0.9375rem]">
+              Décrivez votre tâche en deux lignes. Je vous montre la machine
+              avant qu&apos;on parle d&apos;argent.
+            </p>
+            <p className="!mt-4">
               <a
                 href={whatsappAutomatisation}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="gem"
               >
-                Me dire ce qui vous prend le plus de temps
+                Écrire sur WhatsApp
               </a>
             </p>
           </div>

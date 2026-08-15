@@ -273,6 +273,8 @@
   html.js .sequence-item-2 { animation-delay: 1.1s; }
   html.js .sequence-item-3 { animation-delay: 2.2s; }
   html.js .sequence-item-4 { animation-delay: 3.3s; }
+  /* La chronologie d'impayé compte cinq étapes. */
+  html.js .sequence-item-5 { animation-delay: 4.4s; }
 
   html.js .sequence-etiquette {
     opacity: 0;
