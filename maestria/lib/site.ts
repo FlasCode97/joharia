@@ -90,25 +90,34 @@ export const legal = {
   /** Nom et prénom de la personne physique qui édite le site. */
   editeur: "Mathis Flason",
 
-  /** Statut : micro-entrepreneur, EI, société… */
-  statut: "{{À CONFIRMER PAR MAT}}",
+  /** Statut. Repris de la description que Mat fait de son activité. */
+  statut: "Micro-entrepreneur",
 
-  /** Adresse de l'établissement ou du domicile professionnel. */
+  /** Adresse de l'établissement ou du domicile professionnel.
+   *
+   *  ⚠️ SEUL BLOCAGE RESTANT AVANT MISE EN LIGNE PUBLIQUE. La LCEN impose
+   *  une adresse réelle pour un site professionnel ; je ne peux pas
+   *  l'inventer. Tant que cette ligne n'est pas remplie, ne pas brancher
+   *  l'hébergeur sur le dépôt. */
   adresse: "{{À CONFIRMER PAR MAT}}",
 
-  /** SIREN (9 chiffres) ou SIRET (14 chiffres), délivré à l'immatriculation. */
-  siret: "{{À CONFIRMER PAR MAT}}",
+  /** SIREN (9 chiffres) ou SIRET (14 chiffres), délivré à l'immatriculation.
+   *  À remplacer par le numéro dès réception. */
+  siret: "En cours d'acquisition",
 
   /** Registre d'immatriculation : RCS + ville pour un commerçant, RM pour un
-   *  artisan, ou « non applicable » si profession libérale non inscrite. */
-  registre: "{{À CONFIRMER PAR MAT}}",
+   *  artisan. À compléter dès l'immatriculation effective. */
+  registre: "En cours d'acquisition",
 
   /** Si assujetti : le numéro FR… Sinon laisser la mention de franchise, qui
    *  est elle aussi une mention obligatoire sur les documents commerciaux. */
   tva: "TVA non applicable, article 293 B du code général des impôts",
 
-  /** Nom, raison sociale et adresse de l'hébergeur, avec son téléphone. */
-  hebergeur: "{{À CONFIRMER PAR MAT}}",
+  /** Nom, raison sociale et adresse de l'hébergeur.
+   *  Renseigné pour Cloudflare Pages, où sont déjà hébergés les deux sites
+   *  livrés. À corriger si le site part ailleurs. */
+  hebergeur:
+    "Cloudflare, Inc., 101 Townsend Street, San Francisco, CA 94107, États-Unis. cloudflare.com",
 
   /** Date de dernière mise à jour de cette page. */
   miseAJour: "9 août 2026",
