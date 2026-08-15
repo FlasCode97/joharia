@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { realisations, CAPTURE_L, CAPTURE_H } from "@/lib/site";
+import { realisations, CAPTURE_L, CAPTURE_H, asset } from "@/lib/site";
 
 /** Les sites livrés et payés. Aucun superlatif, aucun chiffre de résultat :
  *  uniquement ce qu'on peut vérifier en ouvrant le lien. */
@@ -30,7 +30,7 @@ export function Realisations() {
             <p className="band-label">{r.nom}</p>
             <div className="band-col">
               <div className="flex flex-col items-start gap-8 sm:flex-row">
-                <CadreTelephone src={r.capture} alt={`Le site ${r.nom} sur un téléphone`} />
+                <CadreTelephone src={asset(r.capture)} alt={`Le site ${r.nom} sur un téléphone`} />
 
                 <div className="min-w-0">
                   <h3 className="!mt-0">{r.nom}</h3>

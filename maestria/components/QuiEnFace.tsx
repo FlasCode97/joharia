@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { site } from "@/lib/site";
+import { site, asset } from "@/lib/site";
 
 /** Un patron de TPE achète à une personne, pas à une marque. Cette section
  *  répond à la question qu'il se pose vraiment : qui décroche quand ça casse.
@@ -72,7 +72,7 @@ function Portrait() {
   return (
     <div className={cadre} style={{ width: 176 }}>
       <Image
-        src={PHOTO.src}
+        src={asset(PHOTO.src)}
         alt={`Mathis Flason, qui répond quand vous écrivez à ${site.name}`}
         width={PHOTO.largeur}
         height={PHOTO.hauteur}

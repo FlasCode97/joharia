@@ -2,6 +2,15 @@
  *  Seul endroit à modifier pour changer un contact.
  */
 
+/** Préfixe des ressources servies depuis /public.
+ *
+ *  GitHub Pages sert le site sous /joharia. `next/image` en mode non optimisé
+ *  ne préfixe PAS le `src` : sans ça, les captures renvoient 404.
+ *  La variable est `NEXT_PUBLIC_` pour être inlinée à l'identique côté serveur
+ *  et côté client, sinon l'hydratation diverge sur l'attribut src. */
+const BASE = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+export const asset = (chemin: string) => `${BASE}${chemin}`;
+
 export const site = {
   name: "Johària",
 
@@ -97,13 +106,10 @@ export const legal = {
   /** Statut. Repris de la description que Mat fait de son activité. */
   statut: "Micro-entrepreneur",
 
-  /** Adresse de l'établissement ou du domicile professionnel.
-   *
-   *  ⚠️ SEUL BLOCAGE RESTANT AVANT MISE EN LIGNE PUBLIQUE. La LCEN impose
-   *  une adresse réelle pour un site professionnel ; je ne peux pas
-   *  l'inventer. Tant que cette ligne n'est pas remplie, ne pas brancher
-   *  l'hébergeur sur le dépôt. */
-  adresse: "{{À CONFIRMER PAR MAT}}",
+  /** Adresse de l'établissement.
+   *  Code postal 97122 ajouté d'après la commune ; à corriger si le lieu-dit
+   *  ou le numéro de voie doivent être précisés. */
+  adresse: "La Jaille, 97122 Baie-Mahault, Guadeloupe",
 
   /** SIREN (9 chiffres) ou SIRET (14 chiffres), délivré à l'immatriculation.
    *  À remplacer par le numéro dès réception. */

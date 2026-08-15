@@ -1,0 +1,60 @@
+name: Déploiement GitHub Pages
+
+# Le site est un export statique : on le construit à chaque envoi sur master,
+# puis on publie le dossier `out`. Pas de serveur, rien à maintenir.
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Un seul déploiement à la fois ; on ne coupe pas celui qui est en cours.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  construire:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: maestria/package-lock.json
+
+      - name: Installer les dépendances
+        working-directory: maestria
+        run: npm ci
+
+      - name: Construire
+        working-directory: maestria
+        # GitHub Pages sert depuis /<nom-du-depot>, d'où le basePath.
+        env:
+          NEXT_PUBLIC_BASE_PATH: /${{ github.event.repository.name }}
+        run: npm run build
+
+      - name: Empêcher Jekyll d'ignorer le dossier _next
+        run: touch maestria/out/.nojekyll
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: maestria/out
+
+  deployer:
+    needs: construire
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploiement.outputs.page_url }}
+    steps:
+      - id: deploiement
+        uses: actions/deploy-pages@v4
